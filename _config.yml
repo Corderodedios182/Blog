@@ -19,7 +19,7 @@ remote_theme: "mmistakes/so-simple-theme"
 locale: en-US
 title: "Ciencia de Datos"
 description: "Hacer es a menudo mejor que pensar en hacerlo"
-#baseurl: # the subpath of your site, e.g. "/blog"
+baseurl: "/Blog" # the subpath of your site, e.g. /blog
 url: "https://corderodedios182.github.io"
 logo: "/images/lbe_logo.png"
 date_format: "%B %-d, %Y"
