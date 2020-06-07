@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Python regular expression cheatsheet and examples | Ciencia de Datos</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Python regular expression cheatsheet and examples" />
+<meta name="author" content="Carlos Flores" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Hacer es a menudo mejor que pensar en hacerlo" />
+<meta property="og:description" content="Hacer es a menudo mejor que pensar en hacerlo" />
+<link rel="canonical" href="http://localhost:4000/cheatsheet/python/python-regex-cheatsheet/" />
+<meta property="og:url" content="http://localhost:4000/cheatsheet/python/python-regex-cheatsheet/" />
+<meta property="og:site_name" content="Ciencia de Datos" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-23T05:41:37-05:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/cheatsheet/python/python-regex-cheatsheet/","headline":"Python regular expression cheatsheet and examples","dateModified":"2019-09-23T05:41:37-05:00","datePublished":"2019-09-23T05:41:37-05:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/lbe_logo.png"},"name":"Carlos Flores"},"author":{"@type":"Person","name":"Carlos Flores"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cheatsheet/python/python-regex-cheatsheet/"},"description":"Hacer es a menudo mejor que pensar en hacerlo","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  python-regular-expression-cheatsheet-and-examples">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/posts/">Posts</a></li><li><a href="/books/">Books</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Ciencia de Datos">
+        <img src="/images/lbe_logo.png" class="site-logo-img animated fadeInDown" alt="Ciencia de Datos">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Ciencia de Datos</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Hacer es a menudo mejor que pensar en hacerlo</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Python regular expression cheatsheet and examples
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info"><div class="author-name">
+        <span class="p-name">Carlos Flores</span>
+      </div><ul class="author-links"><li class="author-link">
+            <a class="u-url" rel="me" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-lg" title="GitHub"></i></a>
+          </li><li class="author-link">
+            <a class="u-url" rel="me" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-lg" title="Linkedin"></i></a>
+          </li></ul>
+
+<span class="read-time">20 min read</span>
+
+    <time class="page-date dt-published" datetime="2019-09-23T05:41:37-05:00"><a class="u-url" href="">September 23, 2019</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a class="p-category" href="/categories/#cheatsheet" title="Pages filed under cheatsheet">cheatsheet</a></li><li class="page-taxonomy"><a class="p-category" href="/categories/#python" title="Pages filed under python">python</a></li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#examples" title="Pages tagged examples" rel="tag">examples</a></li><li class="page-taxonomy"><a href="/tags/#python" title="Pages tagged python" rel="tag">python</a></li><li class="page-taxonomy"><a href="/tags/#re-module" title="Pages tagged re-module" rel="tag">re-module</a></li><li class="page-taxonomy"><a href="/tags/#regular-expressions" title="Pages tagged regular-expressions" rel="tag">regular-expressions</a></li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <p><img src="http://localhost:4000/images/books/pyregex_example.png" alt="pyregex example" class="align-center" /></p>
+
+<p><em>Above diagram created using <a href="https://jex.im/regulex">Regulex</a></em></p>
+
+<p><br /></p>
+
+<p>From <a href="https://docs.python.org/3/library/re.html">docs.python: re</a>:</p>
+
+<blockquote>
+  <p>A regular expression (or RE) specifies a set of strings that matches it; the functions in this module let you check if a particular string matches a given regular expression</p>
+</blockquote>
+
+<p>This blog post gives an overview and examples of regular expression syntax as implemented by the <code class="language-plaintext highlighter-rouge">re</code> built-in module (Python 3.7+). Assume ASCII character set unless otherwise specified. This post is an excerpt from my <a href="https://github.com/learnbyexample/py_regular_expressions">Python re(gex)?</a> book.</p>
+
+<h2 id="elements-that-define-a-regular-expression">Elements that define a regular expression</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Anchors</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\A</code></td>
+      <td>restricts the match to start of string</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\Z</code></td>
+      <td>restricts the match to end of string</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">^</code></td>
+      <td>restricts the match to start of line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$</code></td>
+      <td>restricts the match to end of line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\n</code></td>
+      <td>newline character is used as line separator</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\b</code></td>
+      <td>restricts the match to start/end of words</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>word characters: alphabets, digits, underscore</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\B</code></td>
+      <td>matches wherever <code class="language-plaintext highlighter-rouge">\b</code> doesn’t match</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">^</code>, <code class="language-plaintext highlighter-rouge">$</code> and <code class="language-plaintext highlighter-rouge">\</code> are metacharacters in the above table, as these characters have special meaning. Prefix a <code class="language-plaintext highlighter-rouge">\</code> character to remove the special meaning and match such characters literally. For example, <code class="language-plaintext highlighter-rouge">\^</code> will match a <code class="language-plaintext highlighter-rouge">^</code> character instead of acting as an anchor.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">|</code></td>
+      <td>multiple RE combined as conditional OR</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>each alternative can have independent anchors</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(RE)</code></td>
+      <td>group pattern(s), also a capturing group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">a(b|c)d</code> is same as <code class="language-plaintext highlighter-rouge">abd|acd</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?:RE)</code></td>
+      <td>non-capturing group</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?P&lt;name&gt;pat)</code></td>
+      <td>named capture group</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.</code></td>
+      <td>Match any character except the newline character <code class="language-plaintext highlighter-rouge">\n</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[]</code></td>
+      <td>Character class, matches one character among many</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Greedy Quantifiers</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">*</code></td>
+      <td>Match zero or more times</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">+</code></td>
+      <td>Match one or more times</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?</code></td>
+      <td>Match zero or one times</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{m,n}</code></td>
+      <td>Match <code class="language-plaintext highlighter-rouge">m</code> to <code class="language-plaintext highlighter-rouge">n</code> times (inclusive)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{m,}</code></td>
+      <td>Match at least m times</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{,n}</code></td>
+      <td>Match up to <code class="language-plaintext highlighter-rouge">n</code> times (including <code class="language-plaintext highlighter-rouge">0</code> times)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{n}</code></td>
+      <td>Match exactly n times</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pat1.*pat2</code></td>
+      <td>any number of characters between <code class="language-plaintext highlighter-rouge">pat1</code> and <code class="language-plaintext highlighter-rouge">pat2</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pat1.*pat2|pat2.*pat1</code></td>
+      <td>match both <code class="language-plaintext highlighter-rouge">pat1</code> and <code class="language-plaintext highlighter-rouge">pat2</code> in any order</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Greedy here means that the above quantifiers will match as much as possible that’ll also honor the overall RE. Appending a <code class="language-plaintext highlighter-rouge">?</code> to greedy quantifiers makes them non-greedy, i.e. match as minimally as possible. Quantifiers can be applied to literal characters, groups, backreferences and character classes.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Character class</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[aeiou]</code></td>
+      <td>Match any vowel</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[^aeiou]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">^</code> inverts selection, so this matches any consonant</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[a-f]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">-</code> defines a range, so this matches any of abcdef characters</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\d</code></td>
+      <td>Match a digit, same as <code class="language-plaintext highlighter-rouge">[0-9]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\D</code></td>
+      <td>Match non-digit, same as <code class="language-plaintext highlighter-rouge">[^0-9]</code> or <code class="language-plaintext highlighter-rouge">[^\d]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\w</code></td>
+      <td>Match word character, same as <code class="language-plaintext highlighter-rouge">[a-zA-Z0-9_]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\W</code></td>
+      <td>Match non-word character, same as <code class="language-plaintext highlighter-rouge">[^a-zA-Z0-9_]</code> or <code class="language-plaintext highlighter-rouge">[^\w]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\s</code></td>
+      <td>Match whitespace character, same as <code class="language-plaintext highlighter-rouge">[\ \t\n\r\f\v]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\S</code></td>
+      <td>Match non-whitespace character, same as <code class="language-plaintext highlighter-rouge">[^\ \t\n\r\f\v]</code> or <code class="language-plaintext highlighter-rouge">[^\s]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lookarounds</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>lookarounds</td>
+      <td>custom assertions, zero-width like anchors</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?!pat)</code></td>
+      <td>negative lookahead assertion</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?&lt;!pat)</code></td>
+      <td>negative lookbehind assertion</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?=pat)</code></td>
+      <td>positive lookahead assertion</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?&lt;=pat)</code></td>
+      <td>positive lookbehind assertion</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?!pat1)(?=pat2)</code></td>
+      <td>multiple assertions can be specified in any order</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>as they mark a matching location without consuming characters</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">((?!pat).)*</code></td>
+      <td>Negate a grouping, similar to negated character class</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flags</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.IGNORECASE</code> or <code class="language-plaintext highlighter-rouge">re.I</code></td>
+      <td>flag to ignore case</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.DOTALL</code> or <code class="language-plaintext highlighter-rouge">re.S</code></td>
+      <td>allow <code class="language-plaintext highlighter-rouge">.</code> metacharacter to match newline character</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">flags=re.S|re.I</code></td>
+      <td>multiple flags can be combined using <code class="language-plaintext highlighter-rouge">|</code> operator</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.MULTILINE</code> or <code class="language-plaintext highlighter-rouge">re.M</code></td>
+      <td>allow <code class="language-plaintext highlighter-rouge">^</code> and <code class="language-plaintext highlighter-rouge">$</code> anchors to match line wise</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.VERBOSE</code> or <code class="language-plaintext highlighter-rouge">re.X</code></td>
+      <td>allows to use literal whitespaces for aligning purposes</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>and to add comments after the <code class="language-plaintext highlighter-rouge">#</code> character</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>escape spaces and <code class="language-plaintext highlighter-rouge">#</code> if needed as part of actual RE</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.ASCII</code> or <code class="language-plaintext highlighter-rouge">re.A</code></td>
+      <td>match only ASCII characters for <code class="language-plaintext highlighter-rouge">\b</code>, <code class="language-plaintext highlighter-rouge">\w</code>, <code class="language-plaintext highlighter-rouge">\d</code>, <code class="language-plaintext highlighter-rouge">\s</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>and their opposites, applicable only for Unicode patterns</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.LOCALE</code> or <code class="language-plaintext highlighter-rouge">re.L</code></td>
+      <td>use locale settings for byte patterns and 8-bit locales</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?#comment)</code></td>
+      <td>another way to add comments, not a flag</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?flags:pat)</code></td>
+      <td>inline flags only for this <code class="language-plaintext highlighter-rouge">pat</code>, overrides <code class="language-plaintext highlighter-rouge">flags</code> argument</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>flags is <code class="language-plaintext highlighter-rouge">i</code> for <code class="language-plaintext highlighter-rouge">re.I</code>, <code class="language-plaintext highlighter-rouge">s</code> for <code class="language-plaintext highlighter-rouge">re.S</code>, etc, except <code class="language-plaintext highlighter-rouge">L</code> for <code class="language-plaintext highlighter-rouge">re.L</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?-flags:pat)</code></td>
+      <td>negate flags only for this <code class="language-plaintext highlighter-rouge">pat</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?flags-flags:pat)</code></td>
+      <td>apply and negate particular flags only for this <code class="language-plaintext highlighter-rouge">pat</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?flags)</code></td>
+      <td>apply flags for whole RE, can be used only at start of RE</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>anchors if any, should be specified after these flags</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Matched portion</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.Match</code> object</td>
+      <td>details like matched portions, location, etc</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">m[0]</code> or <code class="language-plaintext highlighter-rouge">m.group(0)</code></td>
+      <td>entire matched portion of <code class="language-plaintext highlighter-rouge">re.Match</code> object <code class="language-plaintext highlighter-rouge">m</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">m[n]</code> or <code class="language-plaintext highlighter-rouge">m.group(n)</code></td>
+      <td>matched portion of <em>n</em>th capture group</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">m.groups()</code></td>
+      <td>tuple of all the capture groups’ matched portions</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">m.span()</code></td>
+      <td>start and end+1 index of entire matched portion</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>pass a number to get span of that particular capture group</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\N</code></td>
+      <td>backreference, gives matched portion of <em>N</em>th capture group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>applies to both search and replacement sections</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>possible values: <code class="language-plaintext highlighter-rouge">\1</code>, <code class="language-plaintext highlighter-rouge">\2</code> up to <code class="language-plaintext highlighter-rouge">\99</code> provided no more digits</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\g&lt;N&gt;</code></td>
+      <td>backreference, gives matched portion of Nth capture group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>possible values: <code class="language-plaintext highlighter-rouge">\g&lt;0&gt;</code>, <code class="language-plaintext highlighter-rouge">\g&lt;1&gt;</code>, etc (not limited to 99)</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">\g&lt;0&gt;</code> refers to entire matched portion</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(?P&lt;name&gt;pat)</code></td>
+      <td>named capture group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>refer as <code class="language-plaintext highlighter-rouge">'name'</code> in <code class="language-plaintext highlighter-rouge">re.Match</code> object</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>refer as <code class="language-plaintext highlighter-rouge">(?P=name)</code> in search section</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>refer as <code class="language-plaintext highlighter-rouge">\g&lt;name&gt;</code> in replacement section</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">\0</code> and <code class="language-plaintext highlighter-rouge">\100</code> onwards are considered as octal values, hence cannot be used as backreferences.</p>
+
+<h2 id="re-module-functions">re module functions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.search</code></td>
+      <td>Check if given pattern is present anywhere in input string</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Output is a <code class="language-plaintext highlighter-rouge">re.Match</code> object, usable in conditional expressions</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>r-strings preferred to define RE</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Use byte pattern for byte input</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Python also maintains a small cache of recent RE</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.compile</code></td>
+      <td>Compile a pattern for reuse, outputs <code class="language-plaintext highlighter-rouge">re.Pattern</code> object</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.sub</code></td>
+      <td>search and replace</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.sub(r'pat', f, s)</code></td>
+      <td>function <code class="language-plaintext highlighter-rouge">f</code> with <code class="language-plaintext highlighter-rouge">re.Match</code> object as argument</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.escape</code></td>
+      <td>automatically escape all metacharacters</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.split</code></td>
+      <td>split a string based on RE</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.findall</code></td>
+      <td>returns all the matches as a list</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>if 1 capture group is used, only its matches are returned</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>1+, each element will be tuple of capture groups</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.finditer</code></td>
+      <td>iterator with <code class="language-plaintext highlighter-rouge">re.Match</code> object for each match</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">re.subn</code></td>
+      <td>gives tuple of modified string and number of substitutions</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The function definitions are given below:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">repl</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">re</span><span class="p">.</span><span class="n">escape</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+<span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">re</span><span class="p">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">re</span><span class="p">.</span><span class="n">subn</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">repl</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="regular-expression-examples">Regular expression examples</h2>
+
+<p>As a good practice, always use <strong>raw strings</strong> to construct RE, unless other formats are required. This will avoid clash of special meaning of backslash character between RE and normal quoted strings.</p>
+
+<ul>
+  <li>examples for <code class="language-plaintext highlighter-rouge">re.search</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">'This is a sample string'</span>
+
+<span class="c1"># need to load the re module before use
+</span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">re</span>
+<span class="c1"># check if 'sentence' contains the pattern described by RE argument
+</span><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'is'</span><span class="p">,</span> <span class="n">sentence</span><span class="p">))</span>
+<span class="bp">True</span>
+<span class="c1"># ignore case while searching for a match
+</span><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'this'</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="n">I</span><span class="p">))</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'xyz'</span><span class="p">,</span> <span class="n">sentence</span><span class="p">))</span>
+<span class="bp">False</span>
+
+<span class="c1"># re.search output can be directly used in conditional expressions
+</span><span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'ring'</span><span class="p">,</span> <span class="n">sentence</span><span class="p">):</span>
+<span class="p">...</span>     <span class="k">print</span><span class="p">(</span><span class="s">'mission success'</span><span class="p">)</span>
+<span class="p">...</span> 
+<span class="n">mission</span> <span class="n">success</span>
+
+<span class="c1"># use raw byte strings if input is of byte data type
+</span><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">rb'is'</span><span class="p">,</span> <span class="s">b'This is a sample string'</span><span class="p">))</span>
+<span class="bp">True</span>
+</code></pre></div></div>
+
+<ul>
+  <li>difference between string and line anchors</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># string anchors
+</span><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'\Ahi'</span><span class="p">,</span> <span class="s">'hi hello</span><span class="se">\n</span><span class="s">top spot'</span><span class="p">))</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">'surrender'</span><span class="p">,</span> <span class="s">'unicorn'</span><span class="p">,</span> <span class="s">'newer'</span><span class="p">,</span> <span class="s">'door'</span><span class="p">,</span> <span class="s">'empty'</span><span class="p">,</span> <span class="s">'eel'</span><span class="p">,</span> <span class="s">'pest'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'er\Z'</span><span class="p">,</span> <span class="n">w</span><span class="p">)]</span>
+<span class="p">[</span><span class="s">'surrender'</span><span class="p">,</span> <span class="s">'newer'</span><span class="p">]</span>
+
+<span class="c1"># line anchors
+</span><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'^par$'</span><span class="p">,</span> <span class="s">'spare</span><span class="se">\n</span><span class="s">par</span><span class="se">\n</span><span class="s">dare'</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="n">M</span><span class="p">))</span>
+<span class="bp">True</span>
+</code></pre></div></div>
+
+<ul>
+  <li>examples for <code class="language-plaintext highlighter-rouge">re.findall</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># match whole word par with optional s at start and optional e at end
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'\bs?pare?\b'</span><span class="p">,</span> <span class="s">'par spar apparent spare part pare'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'par'</span><span class="p">,</span> <span class="s">'spar'</span><span class="p">,</span> <span class="s">'spare'</span><span class="p">,</span> <span class="s">'pare'</span><span class="p">]</span>
+
+<span class="c1"># numbers &gt;= 100 with optional leading zeros
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'\b0*[1-9]\d{2,}\b'</span><span class="p">,</span> <span class="s">'0501 035 154 12 26 98234'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'0501'</span><span class="p">,</span> <span class="s">'154'</span><span class="p">,</span> <span class="s">'98234'</span><span class="p">]</span>
+
+<span class="c1"># if multiple capturing groups are used, each element of output
+# will be a tuple of strings of all the capture groups
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'(x*):(y*)'</span><span class="p">,</span> <span class="s">'xx:yyy x: x:yy :y'</span><span class="p">)</span>
+<span class="p">[(</span><span class="s">'xx'</span><span class="p">,</span> <span class="s">'yyy'</span><span class="p">),</span> <span class="p">(</span><span class="s">'x'</span><span class="p">,</span> <span class="s">''</span><span class="p">),</span> <span class="p">(</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'yy'</span><span class="p">),</span> <span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="s">'y'</span><span class="p">)]</span>
+
+<span class="c1"># normal capture group will hinder ability to get whole match
+# non-capturing group to the rescue
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'\b\w*(?:st|in)\b'</span><span class="p">,</span> <span class="s">'cost akin more east run against'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'cost'</span><span class="p">,</span> <span class="s">'akin'</span><span class="p">,</span> <span class="s">'east'</span><span class="p">,</span> <span class="s">'against'</span><span class="p">]</span>
+
+<span class="c1"># useful for debugging purposes as well before applying substitution
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r't.*?a'</span><span class="p">,</span> <span class="s">'that is quite a fabricated tale'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'tha'</span><span class="p">,</span> <span class="s">'t is quite a'</span><span class="p">,</span> <span class="s">'ted ta'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>examples for <code class="language-plaintext highlighter-rouge">re.split</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># split based on one or more digit characters
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">r'\d+'</span><span class="p">,</span> <span class="s">'Sample123string42with777numbers'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'Sample'</span><span class="p">,</span> <span class="s">'string'</span><span class="p">,</span> <span class="s">'with'</span><span class="p">,</span> <span class="s">'numbers'</span><span class="p">]</span>
+
+<span class="c1"># split based on digit or whitespace characters
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">r'[\d\s]+'</span><span class="p">,</span> <span class="s">'**1</span><span class="se">\f</span><span class="s">2</span><span class="se">\n</span><span class="s">3star</span><span class="se">\t</span><span class="s">7 77</span><span class="se">\r</span><span class="s">**'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'**'</span><span class="p">,</span> <span class="s">'star'</span><span class="p">,</span> <span class="s">'**'</span><span class="p">]</span>
+
+<span class="c1"># to include the matching delimiter strings as well in the output
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">r'(\d+)'</span><span class="p">,</span> <span class="s">'Sample123string42with777numbers'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'Sample'</span><span class="p">,</span> <span class="s">'123'</span><span class="p">,</span> <span class="s">'string'</span><span class="p">,</span> <span class="s">'42'</span><span class="p">,</span> <span class="s">'with'</span><span class="p">,</span> <span class="s">'777'</span><span class="p">,</span> <span class="s">'numbers'</span><span class="p">]</span>
+
+<span class="c1"># use non-capturing group if capturing is not needed
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">r'hand(?:y|ful)'</span><span class="p">,</span> <span class="s">'123handed42handy777handful500'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'123handed42'</span><span class="p">,</span> <span class="s">'777'</span><span class="p">,</span> <span class="s">'500'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>backreferencing within search pattern</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># whole words that have at least one consecutive repeated character
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">'effort'</span><span class="p">,</span> <span class="s">'flee'</span><span class="p">,</span> <span class="s">'facade'</span><span class="p">,</span> <span class="s">'oddball'</span><span class="p">,</span> <span class="s">'rat'</span><span class="p">,</span> <span class="s">'tool'</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'\b\w*(\w)\1\w*\b'</span><span class="p">,</span> <span class="n">w</span><span class="p">)]</span>
+<span class="p">[</span><span class="s">'effort'</span><span class="p">,</span> <span class="s">'flee'</span><span class="p">,</span> <span class="s">'oddball'</span><span class="p">,</span> <span class="s">'tool'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>working with matched portions</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'b.*d'</span><span class="p">,</span> <span class="s">'abc ac adc abbbc'</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">re</span><span class="p">.</span><span class="n">Match</span> <span class="nb">object</span><span class="p">;</span> <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">match</span><span class="o">=</span><span class="s">'bc ac ad'</span><span class="o">&gt;</span>
+<span class="c1"># retrieving entire matched portion, note the use of [0]
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'b.*d'</span><span class="p">,</span> <span class="s">'abc ac adc abbbc'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="s">'bc ac ad'</span>
+
+<span class="c1"># capture group example
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'a(.*)d(.*a)'</span><span class="p">,</span> <span class="s">'abc ac adc abbbc'</span><span class="p">)</span>
+<span class="c1"># to get matched portion of second capture group
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="s">'c a'</span>
+<span class="c1"># to get a tuple of all the capture groups
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">groups</span><span class="p">()</span>
+<span class="p">(</span><span class="s">'bc ac a'</span><span class="p">,</span> <span class="s">'c a'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>examples for <code class="language-plaintext highlighter-rouge">re.finditer</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># numbers &lt; 350
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">m_iter</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">finditer</span><span class="p">(</span><span class="s">r'[0-9]+'</span><span class="p">,</span> <span class="s">'45 349 651 593 4 204'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">m_iter</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">350</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'45'</span><span class="p">,</span> <span class="s">'349'</span><span class="p">,</span> <span class="s">'4'</span><span class="p">,</span> <span class="s">'204'</span><span class="p">]</span>
+
+<span class="c1"># start and end+1 index of each matching portion
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">m_iter</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">finditer</span><span class="p">(</span><span class="s">r'ab+c'</span><span class="p">,</span> <span class="s">'abc ac adc abbbc'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">m_iter</span><span class="p">:</span>
+<span class="p">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">span</span><span class="p">())</span>
+<span class="p">...</span> 
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>examples for <code class="language-plaintext highlighter-rouge">re.sub</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">ip_lines</span> <span class="o">=</span> <span class="s">"catapults</span><span class="se">\n</span><span class="s">concatenate</span><span class="se">\n</span><span class="s">cat"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'^'</span><span class="p">,</span> <span class="s">r'* '</span><span class="p">,</span> <span class="n">ip_lines</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="n">M</span><span class="p">))</span>
+<span class="o">*</span> <span class="n">catapults</span>
+<span class="o">*</span> <span class="n">concatenate</span>
+<span class="o">*</span> <span class="n">cat</span>
+
+<span class="c1"># replace 'par' only at start of word
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'\bpar'</span><span class="p">,</span> <span class="s">r'X'</span><span class="p">,</span> <span class="s">'par spar apparent spare part'</span><span class="p">)</span>
+<span class="s">'X spar apparent spare Xt'</span>
+
+<span class="c1"># same as: r'part|parrot|parent'
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'par(en|ro)?t'</span><span class="p">,</span> <span class="s">r'X'</span><span class="p">,</span> <span class="s">'par part parrot parent'</span><span class="p">)</span>
+<span class="s">'par X X X'</span>
+
+<span class="c1"># remove first two columns where : is delimiter
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'\A([^:]+:){2}'</span><span class="p">,</span> <span class="s">r''</span><span class="p">,</span> <span class="s">'foo:123:bar:baz'</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="s">'bar:baz'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>backreferencing in replacement section</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># remove any number of consecutive duplicate words separated by space
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'\b(\w+)( \1)+\b'</span><span class="p">,</span> <span class="s">r'\1'</span><span class="p">,</span> <span class="s">'aa a a a 42 f_1 f_1 f_13.14'</span><span class="p">)</span>
+<span class="s">'aa a 42 f_1 f_13.14'</span>
+
+<span class="c1"># add something around the matched strings
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'\d+'</span><span class="p">,</span> <span class="s">r'(\g&lt;0&gt;0)'</span><span class="p">,</span> <span class="s">'52 apples and 31 mangoes'</span><span class="p">)</span>
+<span class="s">'(520) apples and (310) mangoes'</span>
+
+<span class="c1"># swap words that are separated by a comma
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'(\w+),(\w+)'</span><span class="p">,</span> <span class="s">r'\2,\1'</span><span class="p">,</span> <span class="s">'good,bad 42,24'</span><span class="p">)</span>
+<span class="s">'bad,good 24,42'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>using functions in replacement section of <code class="language-plaintext highlighter-rouge">re.sub</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="s">'1 2 3 4 5'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">fact_num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="p">...</span>     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+<span class="p">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'\d+'</span><span class="p">,</span> <span class="n">fact_num</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="s">'1 2 6 24 120'</span>
+
+<span class="c1"># using lambda
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'\d+'</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]))),</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="s">'1 2 6 24 120'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>examples for lookarounds</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change 'foo' only if it is not followed by a digit character
+# note that end of string satisfies the given assertion
+# 'foofoo' has two matches as the assertion doesn't consume characters
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'foo(?!\d)'</span><span class="p">,</span> <span class="s">r'baz'</span><span class="p">,</span> <span class="s">'hey food! foo42 foot5 foofoo'</span><span class="p">)</span>
+<span class="s">'hey bazd! foo42 bazt5 bazbaz'</span>
+
+<span class="c1"># change whole word only if it is not preceded by : or -
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r'(?&lt;![:-])\b\w+\b'</span><span class="p">,</span> <span class="s">r'X'</span><span class="p">,</span> <span class="s">':cart &lt;apple -rest ;tea'</span><span class="p">)</span>
+<span class="s">':cart &lt;X -rest ;X'</span>
+
+<span class="c1"># extract digits only if it is preceded by - and followed by ; or :
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r'(?&lt;=-)\d+(?=[:;])'</span><span class="p">,</span> <span class="s">'42 foo-5, baz3; x-83, y-20: f12'</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'20'</span><span class="p">]</span>
+
+<span class="c1"># words containing all lowercase vowels in any order
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">'sequoia'</span><span class="p">,</span> <span class="s">'subtle'</span><span class="p">,</span> <span class="s">'questionable'</span><span class="p">,</span> <span class="s">'exhibit'</span><span class="p">,</span> <span class="s">'equation'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u'</span><span class="p">,</span> <span class="n">w</span><span class="p">)]</span>
+<span class="p">[</span><span class="s">'sequoia'</span><span class="p">,</span> <span class="s">'questionable'</span><span class="p">,</span> <span class="s">'equation'</span><span class="p">]</span>
+
+<span class="c1"># match if 'do' is not there between 'at' and 'par'
+</span><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'at((?!do).)*par'</span><span class="p">,</span> <span class="s">'fox,cat,dog,parrot'</span><span class="p">))</span>
+<span class="bp">False</span>
+<span class="c1"># match if 'go' is not there between 'at' and 'par'
+</span><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'at((?!go).)*par'</span><span class="p">,</span> <span class="s">'fox,cat,dog,parrot'</span><span class="p">))</span>
+<span class="bp">True</span>
+</code></pre></div></div>
+
+<ul>
+  <li>examples for <code class="language-plaintext highlighter-rouge">re.compile</code></li>
+</ul>
+
+<p>Regular expressions can be compiled using <code class="language-plaintext highlighter-rouge">re.compile</code> function, which gives back a <code class="language-plaintext highlighter-rouge">re.Pattern</code> object. The top level <code class="language-plaintext highlighter-rouge">re</code> module functions are all available as methods for this object. Compiling a regular expression helps if the RE has to be used in multiple places or called upon multiple times inside a loop (speed benefit). By default, Python maintains a small list of recently used RE, so the speed benefit doesn’t apply for trivial use cases.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">pet</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">r'dog'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">pet</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">'</span><span class="nc">re</span><span class="p">.</span><span class="n">Pattern</span><span class="s">'&gt;
+&gt;&gt;&gt; bool(pet.search('</span><span class="n">They</span> <span class="n">bought</span> <span class="n">a</span> <span class="n">dog</span><span class="s">'))
+True
+&gt;&gt;&gt; bool(pet.search('</span><span class="n">A</span> <span class="n">cat</span> <span class="n">crossed</span> <span class="n">their</span> <span class="n">path</span><span class="s">'))
+False
+
+&gt;&gt;&gt; remove_parentheses = re.compile(r'</span>\<span class="p">([</span><span class="o">^</span><span class="p">)]</span><span class="o">*</span>\<span class="p">)</span><span class="s">')
+&gt;&gt;&gt; remove_parentheses.sub('', '</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">(</span><span class="n">addition</span><span class="p">)</span> <span class="o">-</span> <span class="n">foo</span><span class="p">()</span> <span class="o">+</span> <span class="n">c</span><span class="o">%</span><span class="n">d</span><span class="p">(</span><span class="c1">#modulo)')
+</span><span class="s">'a+b - foo + c%d'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">remove_parentheses</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="s">'Hi there(greeting). Nice day(a(b)'</span><span class="p">)</span>
+<span class="s">'Hi there. Nice day'</span>
+</code></pre></div></div>
+
+<h2 id="python-regex-book">Python re(gex)? book</h2>
+
+<p>Visit my repo <a href="https://github.com/learnbyexample/py_regular_expressions">Python re(gex)?</a> for details about the book I wrote on Python regular expressions. The ebook uses plenty of examples to explain the concepts from the very beginning and step by step introduces more advanced concepts. The book also covers the <a href="https://pypi.org/project/regex/">third party module regex</a>. The cheatsheet and examples presented in this post are based on contents of this book.</p>
+
+<p>Use <a href="https://leanpub.com/py_regex/c/P7erPYAm1386">this leanpub link</a> for a discounted price.</p>
+
+<p><img src="http://localhost:4000/images/books/pyregex.png" alt="pyregex cover image" class="align-center" /></p>
+
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/r/inteligencia%20artificial/Recomendador-de-Libros-(Filtrado-Colaborativo)/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> Análisis exploratorio, filtrado colaborativo y aplicación Shiny con R.
+
+      </span>
+    </a>
+  
+
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2020 Ciencia de Datos. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

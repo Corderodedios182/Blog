@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Customizing pandoc to generate beautiful pdfs from markdown | Ciencia de Datos</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Customizing pandoc to generate beautiful pdfs from markdown" />
+<meta name="author" content="Carlos Flores" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Table of Contents" />
+<meta property="og:description" content="Table of Contents" />
+<link rel="canonical" href="http://localhost:4000/tutorial/ebook-generation/customizing-pandoc/" />
+<meta property="og:url" content="http://localhost:4000/tutorial/ebook-generation/customizing-pandoc/" />
+<meta property="og:site_name" content="Ciencia de Datos" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-11T15:05:25-06:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/tutorial/ebook-generation/customizing-pandoc/","headline":"Customizing pandoc to generate beautiful pdfs from markdown","dateModified":"2019-03-11T15:05:25-06:00","datePublished":"2019-03-11T15:05:25-06:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/lbe_logo.png"},"name":"Carlos Flores"},"author":{"@type":"Person","name":"Carlos Flores"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/tutorial/ebook-generation/customizing-pandoc/"},"description":"Table of Contents","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  customizing-pandoc-to-generate-beautiful-pdfs-from-markdown">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/posts/">Posts</a></li><li><a href="/books/">Books</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Ciencia de Datos">
+        <img src="/images/lbe_logo.png" class="site-logo-img animated fadeInDown" alt="Ciencia de Datos">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Ciencia de Datos</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Hacer es a menudo mejor que pensar en hacerlo</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Customizing pandoc to generate beautiful pdfs from markdown
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info"><div class="author-name">
+        <span class="p-name">Carlos Flores</span>
+      </div><ul class="author-links"><li class="author-link">
+            <a class="u-url" rel="me" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-lg" title="GitHub"></i></a>
+          </li><li class="author-link">
+            <a class="u-url" rel="me" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-lg" title="Linkedin"></i></a>
+          </li></ul>
+
+<span class="read-time">17 min read</span>
+
+    <time class="page-date dt-published" datetime="2019-03-11T15:05:25-06:00"><a class="u-url" href="">March 11, 2019</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a class="p-category" href="/categories/#ebook-generation" title="Pages filed under ebook-generation">ebook-generation</a></li><li class="page-taxonomy"><a class="p-category" href="/categories/#tutorial" title="Pages filed under tutorial">tutorial</a></li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#markdown" title="Pages tagged markdown" rel="tag">markdown</a></li><li class="page-taxonomy"><a href="/tags/#pandoc" title="Pages tagged pandoc" rel="tag">pandoc</a></li><li class="page-taxonomy"><a href="/tags/#pdf" title="Pages tagged pdf" rel="tag">pdf</a></li><li class="page-taxonomy"><a href="/tags/#xelatex" title="Pages tagged xelatex" rel="tag">xelatex</a></li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <p><strong>Table of Contents</strong></p>
+
+<ul>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#minimal-example">Minimal example</a></li>
+  <li><a href="#chapter-breaks">Chapter breaks</a></li>
+  <li><a href="#changing-settings-via--v-option">Changing settings via -V option</a></li>
+  <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
+  <li><a href="#bullet-styling">Bullet styling</a></li>
+  <li><a href="#pdf-properties">PDF properties</a></li>
+  <li><a href="#adding-table-of-contents">Adding table of contents</a></li>
+  <li><a href="#resource-links">Resource links</a></li>
+</ul>
+
+<p><br /></p>
+
+<p>Either you’ve already heard of <code class="language-plaintext highlighter-rouge">pandoc</code> or if you have searched online for <code class="language-plaintext highlighter-rouge">markdown</code> to <code class="language-plaintext highlighter-rouge">pdf</code> or similar, you are sure to come across <code class="language-plaintext highlighter-rouge">pandoc</code>. This tutorial will give you a basic idea of using <code class="language-plaintext highlighter-rouge">pandoc</code> to generate <code class="language-plaintext highlighter-rouge">pdf</code> from <a href="https://github.github.com/gfm/">GitHub style markdown</a> file. The main purpose is to highlight what customizations I did to generate <code class="language-plaintext highlighter-rouge">pdf</code> for <a href="https://learnbyexample.github.io/books/">self-publishing my ebooks</a>. It wasn’t easy to arrive at the set-up I ended up with, so I hope this will be useful for those looking to use <code class="language-plaintext highlighter-rouge">pandoc</code> to generate <code class="language-plaintext highlighter-rouge">pdf</code>. Specifically aimed at technical books that has code snippets.</p>
+
+<p><br /></p>
+
+<h2 id="installation"><a name="installation"></a>Installation</h2>
+
+<p>I use Ubuntu, as far as I remember, the below steps are enough to work for the demos in this tutorial. If you get an error or warning, search that issue online and you’ll likely find what else has to be installed.</p>
+
+<p>I first downloaded <code class="language-plaintext highlighter-rouge">deb</code> file from <a href="https://github.com/jgm/pandoc/releases">pandoc: releases</a> and installed it. Followed by packages needed for <code class="language-plaintext highlighter-rouge">pdf</code> generation.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="c"># current version is 2.7, I had installed last year with 2.3</span>
+<span class="nv">$ </span><span class="nb">sudo </span>gdebi ~/Downloads/pandoc-2.3-1-amd64.deb
+
+<span class="nv">$ </span><span class="c"># note that download size is 750+ MB</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>texlive-xetex
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>librsvg2-bin
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>texlive-math-extra
+</code></pre></div></div>
+
+<p>For more details and guide for other OS, refer to <a href="https://pandoc.org/installing.html">pandoc: installation</a></p>
+
+<p><br /></p>
+
+<h2 id="minimal-example"><a name="minimal-example"></a>Minimal example</h2>
+
+<p>Once <code class="language-plaintext highlighter-rouge">pandoc</code> is working on your system, try generating a sample <code class="language-plaintext highlighter-rouge">pdf</code> without any customization.</p>
+
+<p><img src="/images/info.svg" alt="info" /> See <a href="https://github.com/learnbyexample/learnbyexample.github.io/tree/master/files/pandoc_pdf">learnbyexample.github.io repo</a> for all the input and output files referred in this tutorial</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pandoc sample_1.md <span class="nt">-f</span> gfm <span class="nt">-o</span> sample_1.pdf
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">sample_1.md</code> is input markdown file and <code class="language-plaintext highlighter-rouge">-f</code> is used to specify that the input format is GitHub style markdown. The <code class="language-plaintext highlighter-rouge">-o</code> option specifies the output file type based on extension. The default output is probably good enough. But has shortcomings like hyperlinks and inline code are hard to distinguish, chapters are not separated, etc.</p>
+
+<p><img src="/images/info.svg" alt="info" /> <code class="language-plaintext highlighter-rouge">pandoc</code> has its own flavor of <code class="language-plaintext highlighter-rouge">markdown</code> with many useful extensions, see <a href="https://pandoc.org/MANUAL.html#pandocs-markdown">pandoc: pandocs-markdown</a> for details. GitHub style markdown is recommended if you wish to use the same source (or with minor changes) in multiple places.</p>
+
+<p><img src="/images/info.svg" alt="info" /> It is advised to use <code class="language-plaintext highlighter-rouge">markdown</code> headers in order without skipping - for example, <code class="language-plaintext highlighter-rouge">H1</code> for chapter heading and <code class="language-plaintext highlighter-rouge">H2</code> for chapter sub-section, etc is fine. <code class="language-plaintext highlighter-rouge">H1</code> for chapter heading and <code class="language-plaintext highlighter-rouge">H3</code> for sub-section is not. Using the former can give automatic index navigation on <code class="language-plaintext highlighter-rouge">pdf</code> readers.</p>
+
+<p>On <a href="https://wiki.gnome.org/Apps/Evince">Evince</a> reader, the index navigation for above sample looks like this:</p>
+
+<p><img src="http://localhost:4000/images/pandoc_pdf/chapter_index.png" alt="Chapter Index" class="align-center" /></p>
+
+<p><br /></p>
+
+<h2 id="chapter-breaks"><a name="chapter-breaks"></a>Chapter breaks</h2>
+
+<p>As observed from previous demo, by default there are no chapter breaks. Searching for a <a href="https://superuser.com/questions/601469/getting-chapters-to-start-on-a-new-page-in-a-pandoc-generated-pdf">solution online</a>, I got this piece of <code class="language-plaintext highlighter-rouge">tex</code> code:</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>sectsty<span class="p">}</span>
+<span class="k">\sectionfont</span><span class="p">{</span><span class="k">\clearpage</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>This can be added using <code class="language-plaintext highlighter-rouge">-H</code> option. From <code class="language-plaintext highlighter-rouge">pandoc</code> manual,</p>
+
+<blockquote>
+  <p>-H FILE, –include-in-header=FILE</p>
+
+  <p>Include  contents  of FILE, verbatim, at the end of the header.  This
+can be used, for example, to include special  CSS  or  JavaScript  in
+HTML documents.  This option can be used repeatedly to include multiple
+files in the header.  They will be included in the  order  specified.
+Implies –standalone.</p>
+</blockquote>
+
+<p>The <code class="language-plaintext highlighter-rouge">pandoc</code> invocation now looks like:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pandoc sample_1.md <span class="nt">-f</span> gfm <span class="nt">-H</span> chapter_break.tex <span class="nt">-o</span> sample_1_chapter_break.pdf
+</code></pre></div></div>
+
+<p>You can add further customization to headings, for example use <code class="language-plaintext highlighter-rouge">\sectionfont{\underline\clearpage}</code> to underline chapter names or <code class="language-plaintext highlighter-rouge">\sectionfont{\LARGE\clearpage}</code> to allow chapter names to get even bigger. Here’s some more links to play with:</p>
+
+<ul>
+  <li><a href="https://tex.stackexchange.com/questions/1455/how-to-set-the-font-for-a-section-title-and-chapter-etc">tex.stackexchange: section fonts</a></li>
+  <li><a href="https://tex.stackexchange.com/questions/230730/section-coming-up-as-undefined-when-using-sectsty">tex.stackexchange: section colors</a></li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="changing-settings-via--v-option"><a name="changing-settings-via--v-option"></a>Changing settings via -V option</h2>
+
+<blockquote>
+  <p>-V KEY[=VAL], –variable=KEY[:VAL]</p>
+
+  <p>Set the template variable KEY to the value  VAL  when  rendering  the
+document  in standalone mode.  This is generally only useful when the
+–template option is used to specify a custom template, since  pandoc
+automatically  sets  the variables used in the default templates.  If
+no VAL is specified, the key will be given the value true.</p>
+</blockquote>
+
+<p>The <code class="language-plaintext highlighter-rouge">-V</code> option allows to change variable values to customize settings like page size, font, link color, etc. As more settings are changed, better to use a simple script to call <code class="language-plaintext highlighter-rouge">pandoc</code> instead of typing the whole command on terminal.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+pandoc <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="se">\</span>
+    <span class="nt">-f</span> gfm <span class="se">\</span>
+    <span class="nt">--include-in-header</span> chapter_break.tex <span class="se">\</span>
+    <span class="nt">-V</span> linkcolor:blue <span class="se">\</span>
+    <span class="nt">-V</span> geometry:a4paper <span class="se">\</span>
+    <span class="nt">-V</span> geometry:margin<span class="o">=</span>2cm <span class="se">\</span>
+    <span class="nt">-V</span> <span class="nv">mainfont</span><span class="o">=</span><span class="s2">"DejaVu Serif"</span> <span class="se">\</span>
+    <span class="nt">-V</span> <span class="nv">monofont</span><span class="o">=</span><span class="s2">"DejaVu Sans Mono"</span> <span class="se">\</span>
+    <span class="nt">--pdf-engine</span><span class="o">=</span>xelatex <span class="se">\</span>
+    <span class="nt">-o</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mainfont</code> is for normal text</li>
+  <li><code class="language-plaintext highlighter-rouge">monofont</code> is for code snippets</li>
+  <li><code class="language-plaintext highlighter-rouge">geometry</code> for page size and margins</li>
+  <li><code class="language-plaintext highlighter-rouge">linkcolor</code> to set hyperlink color</li>
+  <li>to increase default font size, use <code class="language-plaintext highlighter-rouge">-V fontsize=12pt</code>
+    <ul>
+      <li>See <a href="https://stackoverflow.com/questions/23811002/from-markdown-to-pdf-how-to-change-the-font-size-with-pandoc">stackoverflow: change font size</a> if you need even bigger size options</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Using <code class="language-plaintext highlighter-rouge">xelatex</code> as the <code class="language-plaintext highlighter-rouge">pdf-engine</code> allows to use any font installed in the system. One reason I chose <code class="language-plaintext highlighter-rouge">DejaVu</code> was because it supported <strong>Greek</strong> and other Unicode characters that were causing error with other fonts. See <a href="https://tex.stackexchange.com/questions/21736/using-xelatex-instead-of-pdflatex">tex.stackexchange: Using XeLaTeX instead of pdfLaTeX</a> for some more details.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">pandoc</code> invocation is now through a script:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">chmod</span> +x md2pdf.sh
+<span class="nv">$ </span>./md2pdf.sh sample_1.md sample_1_settings.pdf
+</code></pre></div></div>
+
+<p>Do compare the pdf generated side by side with previous output before proceeding.</p>
+
+<p><img src="/images/warning.svg" alt="warning" /> On my system, <code class="language-plaintext highlighter-rouge">DejaVu Serif</code> did not have <em>italic</em> variation installed, so I had to use <code class="language-plaintext highlighter-rouge">sudo apt install ttf-dejavu-extra</code> to get it.</p>
+
+<p><br /></p>
+
+<h2 id="syntax-highlighting"><a name="syntax-highlighting"></a>Syntax highlighting</h2>
+
+<p>One option to customize syntax highlighting for code snippets is to save one of the <code class="language-plaintext highlighter-rouge">pandoc</code> themes and editing it. See <a href="https://stackoverflow.com/questions/30880200/pandoc-what-are-the-available-syntax-highlighters/47876166#47876166">stackoverflow: What are the available syntax highlighters?</a> for available themes and more details (as a good practice on stackoverflow, go through all answers and comments - the linked/related sections on sidebar are useful as well).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pandoc <span class="nt">--print-highlight-style</span><span class="o">=</span>pygments <span class="o">&gt;</span> pygments.theme
+</code></pre></div></div>
+
+<p>Edit the above file to customize the theme. Use sites like <a href="https://www.colorhexa.com/">colorhexa</a> to help with color choices, hex values, etc. For this demo, the below settings are changed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># by default, background is same as normal text
+# change it to a shade of gray to easily distinguish code and text
+"background-color": "#f8f8f8",
+
+# change italic to false, messes up comments with slashes
+# change comment text-color to yet another shade of gray
+"Comment": {
+    "text-color": "#9c9c9c",
+    "background-color": null,
+    "bold": false,
+    "italic": false,
+    "underline": false
+},
+</code></pre></div></div>
+
+<p><strong>Inline code</strong></p>
+
+<p>Similar to changing background color for code snippets, I found a <a href="https://stackoverflow.com/questions/40975004/pandoc-latex-change-backtick-highlight">solution online</a> to change background color for inline code snippets.</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>fancyvrb,newverbs,xcolor<span class="p">}</span>
+
+<span class="k">\definecolor</span><span class="p">{</span>Light<span class="p">}{</span>HTML<span class="p">}{</span>F4F4F4<span class="p">}</span>
+
+<span class="k">\let\oldtexttt\texttt</span>
+<span class="k">\renewcommand</span><span class="p">{</span><span class="k">\texttt</span><span class="p">}</span>[1]<span class="p">{</span>
+  <span class="k">\colorbox</span><span class="p">{</span>Light<span class="p">}{</span><span class="k">\oldtexttt</span><span class="p">{</span>#1<span class="p">}}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Add <code class="language-plaintext highlighter-rouge">--highlight-style pygments.theme</code> and <code class="language-plaintext highlighter-rouge">--include-in-header inline_code.tex</code> to the script and generate the <code class="language-plaintext highlighter-rouge">pdf</code> again.</p>
+
+<p>With <code class="language-plaintext highlighter-rouge">pandoc sample_2.md -f gfm -o sample_2.pdf</code> the output would be:</p>
+
+<p><img src="http://localhost:4000/images/pandoc_pdf/default_syn.png" alt="Default syntax highlighting" class="align-center" /></p>
+
+<p>With <code class="language-plaintext highlighter-rouge">./md2pdf_syn.sh sample_2.md sample_2_syn.pdf</code> the output is:</p>
+
+<p><img src="http://localhost:4000/images/pandoc_pdf/customized_syn.png" alt="Customized syntax highlighting" class="align-center" /></p>
+
+<p><br /></p>
+
+<p>For my <a href="https://github.com/learnbyexample/py_regular_expressions">Python re(gex)?</a> book, by chance I found that using <code class="language-plaintext highlighter-rouge">ruby</code> instead of <code class="language-plaintext highlighter-rouge">python</code> for REPL code snippets syntax highlighting was better. Snapshot from <code class="language-plaintext highlighter-rouge">./md2pdf_syn.sh sample_3.md sample_3.pdf</code> result is shown below. For <code class="language-plaintext highlighter-rouge">python</code> directive, string output gets treated as a comment and color for boolean values isn’t easy to distinguish from string values. The <code class="language-plaintext highlighter-rouge">ruby</code> directive treats string value as expected and boolean values are easier to spot.</p>
+
+<p><img src="http://localhost:4000/images/pandoc_pdf/python_vs_ruby_syn.png" alt="REPL syntax highlighting" class="align-center" /></p>
+
+<p><br /></p>
+
+<h2 id="bullet-styling"><a name="bullet-styling"></a>Bullet styling</h2>
+
+<p>This <a href="https://stackoverflow.com/questions/22156999/how-to-change-the-style-of-bullets-in-pandoc-markdown">stackoverflow Q&amp;A</a> helped for bullet styling.</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>enumitem<span class="p">}</span>
+<span class="k">\usepackage</span><span class="p">{</span>amsfonts<span class="p">}</span>
+
+<span class="c">% level one</span>
+<span class="k">\setlist</span><span class="na">[itemize,1]</span><span class="p">{</span>label=<span class="p">$</span><span class="nv">\bullet</span><span class="p">$}</span>
+<span class="c">% level two</span>
+<span class="k">\setlist</span><span class="na">[itemize,2]</span><span class="p">{</span>label=<span class="p">$</span><span class="nv">\circ</span><span class="p">$}</span>
+<span class="c">% level three</span>
+<span class="k">\setlist</span><span class="na">[itemize,3]</span><span class="p">{</span>label=<span class="p">$</span><span class="nv">\star</span><span class="p">$}</span>
+</code></pre></div></div>
+
+<p>Comparing <code class="language-plaintext highlighter-rouge">pandoc sample_4.md -f gfm -o sample_4.pdf</code> vs <code class="language-plaintext highlighter-rouge">./md2pdf_syn_bullet.sh sample_4.md sample_4_bullet.pdf</code> gives:</p>
+
+<p><img src="http://localhost:4000/images/pandoc_pdf/bullet_styling.png" alt="Bullet styling" class="align-center" /></p>
+
+<p><br /></p>
+
+<h2 id="pdf-properties"><a name="pdf-properties"></a>PDF properties</h2>
+
+<p>This <a href="https://tex.stackexchange.com/questions/23235/eliminate-edit-pdf-properties-added-by-pdflatex">tex.stackexchange Q&amp;A</a> helped to change metadata. See also <a href="https://pspdfkit.com/blog/2018/whats-hiding-in-your-pdf/">pspdfkit: What’s Hiding in Your PDF?</a> and <a href="https://news.ycombinator.com/item?id=18381515">discussion on HN</a>.</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>hyperref<span class="p">}</span>
+
+<span class="k">\hypersetup</span><span class="p">{</span>
+  pdftitle=<span class="p">{</span>My awesome book<span class="p">}</span>,
+  pdfauthor=<span class="p">{</span>learnbyexample<span class="p">}</span>,
+  pdfsubject=<span class="p">{</span>pandoc<span class="p">}</span>,
+  pdfkeywords=<span class="p">{</span>pandoc,pdf,xelatex<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">./md2pdf_syn_bullet_prop.sh sample_4.md sample_4_bullet_prop.pdf</code> gives:</p>
+
+<p><img src="http://localhost:4000/images/pandoc_pdf/pdf_properties.png" alt="PDF properties" class="align-center" /></p>
+
+<p><br /></p>
+
+<h2 id="adding-table-of-contents"><a name="adding-table-of-contents"></a>Adding table of contents</h2>
+
+<p>There’s a handy option <code class="language-plaintext highlighter-rouge">--toc</code> to automatically include table of contents at top of the generated <code class="language-plaintext highlighter-rouge">pdf</code>. You can control number of levels using <code class="language-plaintext highlighter-rouge">--toc-depth</code> option, the default is 3 levels. You can also change the default string <code class="language-plaintext highlighter-rouge">Contents</code> to something else using <code class="language-plaintext highlighter-rouge">-V toc-title</code> option.</p>
+
+<p><code class="language-plaintext highlighter-rouge">./md2pdf_syn_bullet_prop_toc.sh sample_1.md sample_1_toc.pdf</code> gives:</p>
+
+<p><img src="http://localhost:4000/images/pandoc_pdf/table_of_contents.png" alt="table of contents" class="align-center" /></p>
+
+<p>However, if you want to add something prior to table of contents (cover image for example), you need to hack stuff. As far as I know, there’s no inbuilt method. The <code class="language-plaintext highlighter-rouge">-B</code> option only allows verbatim inclusion, whereas we need markdown here. The only cover image option I see is <code class="language-plaintext highlighter-rouge">--epub-cover-image</code> but we need <code class="language-plaintext highlighter-rouge">pdf</code> here. I arrived at a workaround after about a day of trying things - the solution looks simple, but I just didn’t know what is possible until I went through multiple options and this one worked.</p>
+
+<p>For this example, <code class="language-plaintext highlighter-rouge">![cover image](cover.png)</code> is added to <code class="language-plaintext highlighter-rouge">sample_1.md</code> at the top to create input markdown file. The modified script now looks like:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+pandoc <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="se">\</span>
+    <span class="nt">-f</span> gfm <span class="se">\</span>
+    <span class="nt">--toc</span> <span class="se">\</span>
+    <span class="nt">--include-in-header</span> chapter_break.tex <span class="se">\</span>
+    <span class="nt">--include-in-header</span> inline_code.tex <span class="se">\</span>
+    <span class="nt">--include-in-header</span> bullet_style.tex <span class="se">\</span>
+    <span class="nt">--include-in-header</span> pdf_properties.tex <span class="se">\</span>
+    <span class="nt">--highlight-style</span> pygments.theme <span class="se">\</span>
+    <span class="nt">-V</span> toc-title<span class="o">=</span><span class="s1">'Table of contents'</span> <span class="se">\</span>
+    <span class="nt">-V</span> linkcolor:blue <span class="se">\</span>
+    <span class="nt">-V</span> geometry:a4paper <span class="se">\</span>
+    <span class="nt">-V</span> geometry:margin<span class="o">=</span>2cm <span class="se">\</span>
+    <span class="nt">-V</span> <span class="nv">mainfont</span><span class="o">=</span><span class="s2">"DejaVu Serif"</span> <span class="se">\</span>
+    <span class="nt">-V</span> <span class="nv">monofont</span><span class="o">=</span><span class="s2">"DejaVu Sans Mono"</span> <span class="se">\</span>
+    <span class="nt">--pdf-engine</span><span class="o">=</span>xelatex <span class="se">\</span>
+    <span class="nt">-o</span> temp.tex
+
+<span class="nv">fn</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">2</span><span class="p">%.*</span><span class="k">}</span><span class="s2">"</span>
+
+perl <span class="nt">-0777</span> <span class="nt">-pe</span> <span class="se">\</span>
+  <span class="s1">'s/begin\{document\}\n\n\K(.*?^\}$)(.+?)\n/$2\n\\thispagestyle{empty}\n\n$1\n/ms'</span> <span class="se">\</span>
+  temp.tex <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$fn</span><span class="s2">"</span>.tex
+
+xelatex <span class="s2">"</span><span class="nv">$fn</span><span class="s2">"</span>.tex &amp;&gt; /dev/null
+xelatex <span class="s2">"</span><span class="nv">$fn</span><span class="s2">"</span>.tex &amp;&gt; /dev/null
+
+<span class="nb">rm </span>temp.tex <span class="s2">"</span><span class="nv">$fn</span><span class="s2">"</span>.<span class="o">{</span>tex,toc,aux,log<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">pandoc</code> command is changed to produce <code class="language-plaintext highlighter-rouge">tex</code> output instead of <code class="language-plaintext highlighter-rouge">pdf</code>. The <code class="language-plaintext highlighter-rouge">perl</code> script will switch the positions of cover image and table of contents. Also, <code class="language-plaintext highlighter-rouge">\thispagestyle{empty}</code> is added to avoid page number from showing up with cover image, see also <a href="https://tex.stackexchange.com/questions/360739/what-is-the-use-of-clearpage-thispagestyleempty-cleardoublepage">tex.stackexchange: clear page</a>. See my tutorial on <a href="https://github.com/learnbyexample/Command-line-text-processing/blob/master/perl_the_swiss_knife.md">perl one-liners</a> if you are interested in learning how to write such powerful commands.</p>
+
+<p>After modifying the <code class="language-plaintext highlighter-rouge">tex</code> file, <code class="language-plaintext highlighter-rouge">xelatex</code> command is directly used to get the <code class="language-plaintext highlighter-rouge">pdf</code> output. For some reason, the table of contents goes awry but gives correct output if the command is called twice! The output file is named same as input, but with extension changed from <code class="language-plaintext highlighter-rouge">tex</code> to <code class="language-plaintext highlighter-rouge">pdf</code>. Finally, the temporary files are removed.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">bash</code> script invocation is now <code class="language-plaintext highlighter-rouge">./md2pdf_syn_bullet_prop_toc_cover.sh sample_5.md sample_5.pdf</code>.</p>
+
+<p>After posting the above solution, I realized that for simple content like cover image, you can use <code class="language-plaintext highlighter-rouge">tex</code> file and include it verbatim instead of hacking and calling <code class="language-plaintext highlighter-rouge">xelatex</code> twice, etc. For above example, use <code class="language-plaintext highlighter-rouge">sample_1.md</code> instead of <code class="language-plaintext highlighter-rouge">sample_5.md</code> as input markdown. Create a <code class="language-plaintext highlighter-rouge">tex</code> file with content shown below:</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\includegraphics</span><span class="p">{</span>cover.png<span class="p">}</span>
+<span class="k">\thispagestyle</span><span class="p">{</span>empty<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then, modify the <code class="language-plaintext highlighter-rouge">md2pdf_syn_bullet_prop_toc.sh</code> script by adding <code class="language-plaintext highlighter-rouge">--include-before-body cover.tex</code> and tada - you get the cover image before table of contents in a much easier way than hacking intermediate <code class="language-plaintext highlighter-rouge">tex</code> file.</p>
+
+<p><img src="/images/warning.svg" alt="warning" /> You’ll need at least one image in input markdown file, otherwise settings won’t apply to the cover image and you may end up with weird output. And be careful to use escapes if the image path can contain <code class="language-plaintext highlighter-rouge">tex</code> metacharacters.</p>
+
+<p><br /></p>
+
+<h2 id="resource-links"><a name="resource-links"></a>Resource links</h2>
+
+<ul>
+  <li><a href="https://pandoc.org/MANUAL.html">pandoc: manual</a></li>
+  <li><a href="https://pandoc.org/demos.html">pandoc: demos</a></li>
+  <li><a href="https://github.com/jgm/pandoc/wiki/Pandoc-Tricks">pandoc: tips and tricks</a></li>
+  <li><a href="https://tex.stackexchange.com/questions/154528/how-to-change-the-background-color-and-border-of-a-pandoc-generated-blockquote">tex.stackexchange: How to change the background color and border of a blockquote?</a></li>
+  <li><a href="https://tex.stackexchange.com/questions/10138/change-section-fonts">tex.stackexchange: Change section fonts</a></li>
+</ul>
+
+<p><strong>More options for generating ebooks</strong>:</p>
+
+<ul>
+  <li><a href="https://github.com/Wandmalfarbe/pandoc-latex-template">pandoc-latex-template</a> - a clean pandoc LaTeX template to convert your markdown files to PDF or LaTeX</li>
+  <li><a href="https://asciidoctor.org/docs/what-is-asciidoc/">Asciidoctor</a></li>
+  <li><a href="https://www.sphinx-doc.org/en/stable/index.html">Sphinx</a>
+    <ul>
+      <li><a href="https://digitalsuperpowers.com/blog/2019-02-16-publishing-ebook.html">Self-publishing a book with reStructuredText, Sphinx, Calibre, and vim</a></li>
+    </ul>
+  </li>
+  <li><a href="https://bookdown.org/home/">Bookdown</a></li>
+  <li><a href="https://orgmode.org/">emacs orgmode</a></li>
+  <li><a href="https://casual-effects.com/markdeep/">Markdeep</a></li>
+</ul>
+
+<p><strong>Miscellaneous</strong></p>
+
+<ul>
+  <li><a href="https://nickjanetakis.com/blog/vim-is-saving-me-hours-of-work-when-writing-books-and-courses">Vim is saving me hours of work when writing books &amp; courses</a></li>
+  <li><a href="https://joecmarshall.com/posts/book-writing-environment/">Writing a Book with Unix</a></li>
+  <li><a href="https://askubuntu.com/questions/3697/how-do-i-install-fonts">askubuntu: How do I install fonts?</a></li>
+  <li><a href="https://tex.stackexchange.com/questions/9533/what-best-combination-of-fonts-for-serif-sans-and-mono-do-you-recommend">tex.stackexchange: What best combination of fonts for Serif, Sans, and Mono do you recommend?</a></li>
+  <li><a href="http://www.tug.dk/FontCatalogue/">LATEX font catalogue</a></li>
+  <li><a href="https://github.com/karthik/markdown_science/wiki/Tools-to-support-your-markdown-authoring">Tools to support markdown authoring</a></li>
+  <li><a href="https://picular.co/">picular: search engine for colors</a></li>
+  <li><a href="https://ebooks.stackexchange.com/questions?sort=votes">ebooks.stackexchange</a></li>
+</ul>
+
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/shell%20scripting/a-short-and-satisfying-bug-hunt/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> A short and satisfying bug hunt
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/curated-resources/python-for-maths/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Python for maths
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2020 Ciencia de Datos. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

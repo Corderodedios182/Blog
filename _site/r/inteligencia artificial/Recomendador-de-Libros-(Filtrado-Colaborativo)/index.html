@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Análisis exploratorio, filtrado colaborativo y aplicación Shiny con R. | Ciencia de Datos</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Análisis exploratorio, filtrado colaborativo y aplicación Shiny con R." />
+<meta name="author" content="Carlos Flores" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="¿Alguna vez te has preguntado qué libro leer?, Las recomendaciones de libros son un tema fascinante." />
+<meta property="og:description" content="¿Alguna vez te has preguntado qué libro leer?, Las recomendaciones de libros son un tema fascinante." />
+<link rel="canonical" href="http://localhost:4000/r/inteligencia%20artificial/Recomendador-de-Libros-(Filtrado-Colaborativo)/" />
+<meta property="og:url" content="http://localhost:4000/r/inteligencia%20artificial/Recomendador-de-Libros-(Filtrado-Colaborativo)/" />
+<meta property="og:site_name" content="Ciencia de Datos" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-01T09:37:42-05:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/r/inteligencia%20artificial/Recomendador-de-Libros-(Filtrado-Colaborativo)/","headline":"Análisis exploratorio, filtrado colaborativo y aplicación Shiny con R.","dateModified":"2019-06-01T09:37:42-05:00","datePublished":"2019-06-01T09:37:42-05:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/lbe_logo.png"},"name":"Carlos Flores"},"author":{"@type":"Person","name":"Carlos Flores"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/r/inteligencia%20artificial/Recomendador-de-Libros-(Filtrado-Colaborativo)/"},"description":"¿Alguna vez te has preguntado qué libro leer?, Las recomendaciones de libros son un tema fascinante.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  análisis-exploratorio-filtrado-colaborativo-y-aplicación-shiny-con-r">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/posts/">Posts</a></li><li><a href="/books/">Books</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Ciencia de Datos">
+        <img src="/images/lbe_logo.png" class="site-logo-img animated fadeInDown" alt="Ciencia de Datos">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Ciencia de Datos</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Hacer es a menudo mejor que pensar en hacerlo</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Análisis exploratorio, filtrado colaborativo y aplicación Shiny con R.
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info"><div class="author-name">
+        <span class="p-name">Carlos Flores</span>
+      </div><ul class="author-links"><li class="author-link">
+            <a class="u-url" rel="me" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-lg" title="GitHub"></i></a>
+          </li><li class="author-link">
+            <a class="u-url" rel="me" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-lg" title="Linkedin"></i></a>
+          </li></ul>
+
+<span class="read-time">52 min read</span>
+
+    <time class="page-date dt-published" datetime="2019-06-01T09:37:42-05:00"><a class="u-url" href="">June 1, 2019</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a class="p-category" href="/categories/#inteligencia-artificial" title="Pages filed under Inteligencia Artificial">Inteligencia Artificial</a></li><li class="page-taxonomy"><a class="p-category" href="/categories/#r" title="Pages filed under R">R</a></li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#inteligencia-artificial" title="Pages tagged Inteligencia Artificial" rel="tag">Inteligencia Artificial</a></li><li class="page-taxonomy"><a href="/tags/#r" title="Pages tagged R" rel="tag">R</a></li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <p>¿Alguna vez te has preguntado qué libro leer?, Las recomendaciones de libros son un tema fascinante.</p>
+
+<p>Este conjunto de datos externo nos permite profundizar en las recomendaciones de libros basados en datos.</p>
+
+<p>El reporte se divide en tres partes:</p>
+
+<ul>
+  <li>Parte I: explora el conjunto de datos para encontrar algunas ideas interesantes.</li>
+  <li>Parte II: presenta y demuestra el filtrado colaborativo.</li>
+  <li>Parte III: defino la REAS, entorno de trabajo.</li>
+  <li>Parte IV: Implementación de aplicación con Shiny R (para recomendar algunos libros (para mí y para usted :-)).</li>
+</ul>
+
+<p>Puede acceder (simplemente haga clic en (https://philippsp.shinyapps.io/BookRecommendation/), subí el código a un servidor para aplicaciones Shiny pero de igual manera comparto el código comentado.</p>
+
+<h2 id="i-exploración-de-los-datos">I. Exploración de los datos</h2>
+
+<p>Ha habido buenos conjuntos de datos para películas (Netflix, Movielens) y recomendaciones de música (Million Songs), pero no para libros.</p>
+
+<p>Trabajaré con 3 conjuntos de datos:</p>
+
+<ul>
+  <li>books: Este conjunto de datos contiene calificaciones de diez mil libros populares.</li>
+  <li>ratings: Ratings que han colocado 53424 usuarios.</li>
+  <li>tags: Etiquetas de genero que han colocado los usuarios.</li>
+</ul>
+
+<p>Vienen a la mente muchas preguntas.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fread</span><span class="p">(</span><span class="s1">'books.csv'</span><span class="p">)</span><span class="w">
+</span><span class="n">ratings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fread</span><span class="p">(</span><span class="s1">'ratings.csv'</span><span class="p">)</span><span class="w">
+</span><span class="n">tags</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fread</span><span class="p">(</span><span class="s1">'tags.csv'</span><span class="p">)</span><span class="w">
+</span><span class="n">book_tags</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fread</span><span class="p">(</span><span class="s1">'book_tags.csv'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="p">(</span><span class="s2">"23 columna en el dataset : "</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">books</span><span class="p">))</span><span class="w">
+</span><span class="c1">#Las más importantes para nuestro analísis.</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">books</span><span class="p">,</span><span class="w"> </span><span class="n">book_id</span><span class="p">,</span><span class="w"> </span><span class="n">authors</span><span class="p">,</span><span class="w"> </span><span class="n">original_publication_year</span><span class="p">,</span><span class="w"> </span><span class="n">language_code</span><span class="p">,</span><span class="w"> </span><span class="n">image_url</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>23 columna en el dataset :  id book_id best_book_id work_id books_count isbn isbn13 authors original_publication_year original_title title language_code average_rating ratings_count work_ratings_count work_text_reviews_count ratings_1 ratings_2 ratings_3 ratings_4 ratings_5 image_url small_image_url
+</code></pre></div></div>
+
+<table>
+<caption>A data.table: 6 × 5</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;book_id&lt;/th&gt;&lt;th scope=col&gt;authors&lt;/th&gt;&lt;th scope=col&gt;original_publication_year&lt;/th&gt;&lt;th scope=col&gt;language_code&lt;/th&gt;&lt;th scope=col&gt;image_url&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td> 2767052</td><td>Suzanne Collins            </td><td>2008</td><td>eng  </td><td>https://images.gr-assets.com/books/1447303603m/2767052.jpg </td></tr>
+	<tr><td>       3</td><td>J.K. Rowling, Mary GrandPré</td><td>1997</td><td>eng  </td><td>https://images.gr-assets.com/books/1474154022m/3.jpg       </td></tr>
+	<tr><td>   41865</td><td>Stephenie Meyer            </td><td>2005</td><td>en-US</td><td>https://images.gr-assets.com/books/1361039443m/41865.jpg   </td></tr>
+	<tr><td>    2657</td><td>Harper Lee                 </td><td>1960</td><td>eng  </td><td>https://images.gr-assets.com/books/1361975680m/2657.jpg    </td></tr>
+	<tr><td>    4671</td><td>F. Scott Fitzgerald        </td><td>1925</td><td>eng  </td><td>https://images.gr-assets.com/books/1490528560m/4671.jpg    </td></tr>
+	<tr><td>11870085</td><td>John Green                 </td><td>2012</td><td>eng  </td><td>https://images.gr-assets.com/books/1360206420m/11870085.jpg</td></tr>
+</tbody>
+</table>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Los ratings los cruzaremos con books, tenemos 53424 usuarios unicos que cruzaremos con la base books.</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.table: 6 × 3</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;book_id&lt;/th&gt;&lt;th scope=col&gt;user_id&lt;/th&gt;&lt;th scope=col&gt;rating&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td> 314</td><td>5</td></tr>
+	<tr><td>1</td><td> 439</td><td>3</td></tr>
+	<tr><td>1</td><td> 588</td><td>5</td></tr>
+	<tr><td>1</td><td>1169</td><td>4</td></tr>
+	<tr><td>1</td><td>1185</td><td>4</td></tr>
+	<tr><td>1</td><td>2077</td><td>4</td></tr>
+</tbody>
+</table>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Tenemos los generos de los libros</span><span class="w">
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"Generos que los usuarios le han colocado a los libros : "</span><span class="p">,</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">tags</span><span class="p">))</span><span class="w">
+</span><span class="n">tags</span><span class="p">[</span><span class="m">25</span><span class="o">:</span><span class="m">30</span><span class="p">,]</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Generos que los usuarios le han colocado a los libros :  34252 2
+</code></pre></div></div>
+
+<table>
+<caption>A data.table: 6 × 2</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;tag_id&lt;/th&gt;&lt;th scope=col&gt;tag_name&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;chr&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>24</td><td>-england-  </td></tr>
+	<tr><td>25</td><td>-fiction   </td></tr>
+	<tr><td>26</td><td>-fictional </td></tr>
+	<tr><td>27</td><td>-fictitious</td></tr>
+	<tr><td>28</td><td>-football- </td></tr>
+	<tr><td>29</td><td>-george    </td></tr>
+</tbody>
+</table>
+
+<h3 id="limpieza-del-conjunto-de-datos">Limpieza del conjunto de datos</h3>
+
+<p>Al igual que con casi cualquier conjunto de datos de la vida real, primero debemos hacer un poco de limpieza.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Los datos de ratings contienen casi 1 millón de filas.</span><span class="w">
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"Filas y columnas : "</span><span class="p">,</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">ratings</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Filas y columnas :  981756 3
+</code></pre></div></div>
+
+<p>Noté que había libros que tenían más de una evaluación por el mismo usuarios, para estos casos promedie los ratings.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Ejemplo de un usuario que voto más de una vez por libro.</span><span class="w">
+</span><span class="n">filter</span><span class="p">(</span><span class="n">ratings</span><span class="p">,</span><span class="w"> </span><span class="n">book_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">849</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">11283</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#tmp &lt;- ratings %&gt;% group_by(book_id, user_id) %&gt;% summarise(Conteo = n())</span><span class="w">
+</span><span class="c1">#head(filter(tmp,Conteo &gt; 2))</span><span class="w">
+
+</span><span class="n">ratings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ratings</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">group_by</span><span class="p">(</span><span class="n">book_id</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">summarise</span><span class="p">(</span><span class="n">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.frame: 3 × 3</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;book_id&lt;/th&gt;&lt;th scope=col&gt;user_id&lt;/th&gt;&lt;th scope=col&gt;rating&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>849</td><td>11283</td><td>3</td></tr>
+	<tr><td>849</td><td>11283</td><td>4</td></tr>
+	<tr><td>849</td><td>11283</td><td>4</td></tr>
+</tbody>
+</table>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Ejemplo del usuario con más de 3 votaciones en un libro</span><span class="w">
+</span><span class="n">filter</span><span class="p">(</span><span class="n">ratings</span><span class="p">,</span><span class="w"> </span><span class="n">book_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">849</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">11283</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A grouped_df: 1 × 3</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;book_id&lt;/th&gt;&lt;th scope=col&gt;user_id&lt;/th&gt;&lt;th scope=col&gt;rating&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>849</td><td>11283</td><td>3.666667</td></tr>
+</tbody>
+</table>
+
+<p>Encontré usuarios que votaron menos de 3 veces, decidí eliminarlos ya que afectaban el modelo de recomendación.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ratings</span><span class="p">[,</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">.N</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">(</span><span class="n">user_id</span><span class="p">)]</span><span class="w">
+
+</span><span class="n">cat</span><span class="p">(</span><span class="s1">'Número de usuarios que calificaron menos de 3 libros: '</span><span class="p">,</span><span class="w"> </span><span class="n">uniqueN</span><span class="p">(</span><span class="n">ratings</span><span class="p">[</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">]))</span><span class="w">
+
+</span><span class="n">ratings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ratings</span><span class="p">[</span><span class="n">N</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">2</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Número de usuarios que calificaron menos de 3 libros:  8302
+</code></pre></div></div>
+
+<p>En cuanto a las bases books y tags se encuentran limpias.</p>
+
+<h3 id="comenzemos-la-exploración">Comenzemos la exploración</h3>
+
+<h6 id="comó-se-distribuyen-las-calificaciones">¿Comó se distribuyen las calificaciones?</h6>
+
+<p>Vemos que las personas tienden a dar calificaciones bastante positivas a los libros.</p>
+
+<p>La mayoría de las clasificaciones están en el rango 3-5, mientras que muy pocas clasificaciones están en el rango 1-2.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span><span class="n">ratings</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rating</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">rating</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey20"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">scale_fill_brewer</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"YlGnBu"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"mayoría de ratings entre 3-5 \nmuy pocos ratings 1-2"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_16_0.png" alt="quantifiers" /></p>
+
+<h6 id="número-de-valoraciones-por-usuario">Número de valoraciones por usuario</h6>
+
+<p>A medida que filtramos nuestras calificaciones, todos los usuarios tienen al menos 3 calificaciones.</p>
+
+<p>Sin embargo, también podemos ver que hay algunos usuarios con muchas calificaciones.</p>
+
+<p>Esto es interesante, porque luego podemos examinar si los evaluadores frecuentes califican los libros de manera diferente a los evaluadores menos frecuentes.</p>
+
+<p>Vamos a volver a esto más adelante.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ratings</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">number_of_ratings_per_user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">number_of_ratings_per_user</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"cadetblue3"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coord_cartesian</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Min: 3 , 1°Quantil 5: , Mean: 21,\n 3°Quantil: 26, Max: 197"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"numero de ratings por usuario"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Conteo"</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_18_0.png" alt="quantifiers" /></p>
+
+<h6 id="distribución-de-valoraciones-medias-de-usuarios">Distribución de valoraciones medias de usuarios</h6>
+
+<p>Las personas tienen diferentes tendencias para calificar los libros.</p>
+
+<p>Algunos ya le dan 5 estrellas a un libro mediocre, mientras que otros no le dan 5 estrellas a menos que sea el libro perfecto para ellos.</p>
+
+<p>Tales tendencias se pueden ver en la gráfica a continuación.</p>
+
+<p>En el lado derecho hay un aumento de los usuarios con una calificación media de 5, lo que indica que realmente les gustaron todos los libros (o solo calificaron los libros que realmente les gustan …).</p>
+
+<p>También podemos ver que casi no hay notorios votantes que califican a todos los libros con un 1.</p>
+
+<p>Estas tendencias serán importantes para el filtrado colaborativo más adelante, y generalmente se restan restando la calificación promedio del usuario de sus calificaciones.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ratings</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">mean_user_rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">mean_user_rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"cadetblue3"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey20"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Min: 1 , 1°Quantil 3.5: , Mean: 3.8,\n 3°Quantil: 4.2, Max: 5"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Usuarios ratings"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+</code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_20_1.png" alt="quantifiers" /></p>
+
+<h6 id="número-de-calificaciones-por-libro">Número de calificaciones por libro</h6>
+
+<p>Podemos ver que en el conjunto de datos subconjunto, la mayoría de los libros tienen alrededor de 18-20 clasificaciones.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ratings</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">book_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">number_of_ratings_per_book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">number_of_ratings_per_book</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orange"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey20"</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coord_cartesian</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">40</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Min: 1 , 1°Quantil 16: , Mean: 18,\n 3°Quantil: 22, Max: 37"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Numero de ratings por libro"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_22_0.png" alt="quantifiers" /></p>
+
+<h6 id="distribución-de-calificaciones-medias-de-libros">Distribución de calificaciones medias de libros</h6>
+
+<p>Las calificaciones medias de los libros no revelan ninguna peculiaridad.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ratings</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">book_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">mean_book_rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">mean_book_rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orange"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey20"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coord_cartesian</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Min: 1.8 , 1°Quantil 3.6: , Mean: 3.8,\n 3°Quantil: 4.1, Max: 5"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+</code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_24_1.png" alt="quantifiers" /></p>
+
+<h6 id="distribución-de-géneros">Distribución de géneros</h6>
+<p>Extraer los géneros de los libros no es trivial ya que los usuarios asignan etiquetas autoelegidas a los libros,
+que pueden o no ser los mismos que los géneros definidos por goodreads.</p>
+
+<p>Como forma pragmática, elegí solo las etiquetas que coinciden con las proporcionadas por goodbooks.</p>
+
+<p>La mayoría de los libros son libros de “Fantasía”, “Romance” o “Misterio”,mientras que no hay muchos “Libros de cocina” en la base de datos.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">genres</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">str_to_lower</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"Art"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Biography"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Business"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Chick Lit"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Children's"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Christian"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Classics"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Comics"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Contemporary"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Cookbooks"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Crime"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Ebooks"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fantasy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Gay and Lesbian"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Graphic Novels"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Historical Fiction"</span><span class="p">,</span><span class="w"> </span><span class="s2">"History"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Horror"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Humor and Comedy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Manga"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Memoir"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Music"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Mystery"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Nonfiction"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Paranormal"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Philosophy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Poetry"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Psychology"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Religion"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Romance"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Science"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Science Fiction"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Self Help"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Suspense"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Spirituality"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sports"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Thriller"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Travel"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Young Adult"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">exclude_genres</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"fiction"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nonfiction"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ebooks"</span><span class="p">,</span><span class="w"> </span><span class="s2">"contemporary"</span><span class="p">)</span><span class="w">
+</span><span class="n">genres</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setdiff</span><span class="p">(</span><span class="n">genres</span><span class="p">,</span><span class="w"> </span><span class="n">exclude_genres</span><span class="p">)</span><span class="w">
+
+</span><span class="n">available_genres</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">genres</span><span class="p">[</span><span class="n">str_to_lower</span><span class="p">(</span><span class="n">genres</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">tags</span><span class="o">$</span><span class="n">tag_name</span><span class="p">]</span><span class="w">
+</span><span class="n">available_tags</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tags</span><span class="o">$</span><span class="n">tag_id</span><span class="p">[</span><span class="n">match</span><span class="p">(</span><span class="n">available_genres</span><span class="p">,</span><span class="w"> </span><span class="n">tags</span><span class="o">$</span><span class="n">tag_name</span><span class="p">)]</span><span class="w">
+
+</span><span class="n">tmp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">book_tags</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">tag_id</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">available_tags</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">tag_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ungroup</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">sumN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">percentage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sumN</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">percentage</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">left_join</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tag_id"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">tmp</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">reorder</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span><span class="w"> </span><span class="n">percentage</span><span class="p">),</span><span class="w"> </span><span class="n">percentage</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">percentage</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coord_flip</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">scale_fill_distiller</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'YlOrRd'</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Percentage'</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Genre'</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Distribucion de generos libros"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_26_0.png" alt="quantifiers" /></p>
+
+<h6 id="idiomas-diferentes">Idiomas diferentes</h6>
+
+<p>En la base books tenemos una columna que nos indica el lenguaje.</p>
+
+<p>Esto es interesante porque goodreads el sitio donde descargué los datos es de habla inglesa.</p>
+
+<p>Sin embargo, el conjunto de datos contiene algunos libros en diferentes idiomas.</p>
+
+<p>La razón es que normalmente hay varias ediciones de un libro (tanto en el mismo idioma como en diferentes idiomas).</p>
+
+<p>Para este conjunto de datos, parece que se incluyó la edición más popular, que para algunos libros es su idioma original.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">language_code</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">language</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">number_of_books</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">number_of_books</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">reorder</span><span class="p">(</span><span class="n">language</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_books</span><span class="p">),</span><span class="w"> </span><span class="n">number_of_books</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reorder</span><span class="p">(</span><span class="n">language</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_books</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey20"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.35</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coord_flip</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"language"</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"english included"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">language_code</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">language</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"en-US"</span><span class="p">,</span><span class="w"> </span><span class="s2">"en-GB"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eng"</span><span class="p">,</span><span class="w"> </span><span class="s2">"en-CA"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">language</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">number_of_books</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">number_of_books</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">reorder</span><span class="p">(</span><span class="n">language</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_books</span><span class="p">),</span><span class="w"> </span><span class="n">number_of_books</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reorder</span><span class="p">(</span><span class="n">language</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_books</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey20"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.35</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coord_flip</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"english excluded"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">grid.arrange</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_28_0.png" alt="quantifiers" /></p>
+
+<h6 id="los-10-libros-mejor-calificados">Los 10 libros mejor calificados</h6>
+
+<p>Es evidente que a los usuarios les gusta</p>
+<ul>
+  <li>a) Calvin y Hobbes en general.</li>
+  <li>b) compilaciones de libros.</li>
+</ul>
+
+<p>Esto tiene sentido intuitivamente ya que las personas no se interesarán en una compilación completa si no les gustan los libros individuales.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s1">'&lt;img src="'</span><span class="p">,</span><span class="w"> </span><span class="n">small_image_url</span><span class="p">,</span><span class="w"> </span><span class="s1">'"&gt;&lt;/img&gt;'</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">average_rating</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">top_n</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="n">wt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">average_rating</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">ratings_count</span><span class="p">,</span><span class="w"> </span><span class="n">average_rating</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.frame: 11 × 3</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;title&lt;/th&gt;&lt;th scope=col&gt;ratings_count&lt;/th&gt;&lt;th scope=col&gt;average_rating&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;chr&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>The Complete Calvin and Hobbes                                   </td><td> 28900</td><td>4.82</td></tr>
+	<tr><td>Words of Radiance (The Stormlight Archive, #2)                   </td><td> 73572</td><td>4.77</td></tr>
+	<tr><td>Harry Potter Boxed Set, Books 1-5 (Harry Potter, #1-5)           </td><td> 33220</td><td>4.77</td></tr>
+	<tr><td>ESV Study Bible                                                  </td><td>  8953</td><td>4.76</td></tr>
+	<tr><td>Mark of the Lion Trilogy                                         </td><td>  9081</td><td>4.76</td></tr>
+	<tr><td>It's a Magical World: A Calvin and Hobbes Collection             </td><td> 22351</td><td>4.75</td></tr>
+	<tr><td>Harry Potter Boxset (Harry Potter, #1-7)                         </td><td>190050</td><td>4.74</td></tr>
+	<tr><td>There's Treasure Everywhere: A Calvin and Hobbes Collection      </td><td> 16766</td><td>4.74</td></tr>
+	<tr><td>Harry Potter Collection (Harry Potter, #1-6)                     </td><td> 24618</td><td>4.73</td></tr>
+	<tr><td>The Authoritative Calvin and Hobbes: A Calvin and Hobbes Treasury</td><td> 16087</td><td>4.73</td></tr>
+	<tr><td>The Indispensable Calvin and Hobbes                              </td><td> 14597</td><td>4.73</td></tr>
+</tbody>
+</table>
+
+<h6 id="los-10-mejores-libros-más-populares">Los 10 mejores libros más populares</h6>
+
+<p>Al mirar los libros que fueron calificados con mayor frecuencia podemos tener una impresión de la popularidad de un libro.</p>
+
+<p>Podemos ver los 10 mejores libros populares en la tabla a continuación.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s1">'&lt;img src="'</span><span class="p">,</span><span class="w"> </span><span class="n">small_image_url</span><span class="p">,</span><span class="w"> </span><span class="s1">'"&gt;&lt;/img&gt;'</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">ratings_count</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">top_n</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="n">wt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ratings_count</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">ratings_count</span><span class="p">,</span><span class="w"> </span><span class="n">average_rating</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.frame: 10 × 3</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;title&lt;/th&gt;&lt;th scope=col&gt;ratings_count&lt;/th&gt;&lt;th scope=col&gt;average_rating&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;chr&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>The Hunger Games (The Hunger Games, #1)                 </td><td>4780653</td><td>4.34</td></tr>
+	<tr><td>Harry Potter and the Sorcerer's Stone (Harry Potter, #1)</td><td>4602479</td><td>4.44</td></tr>
+	<tr><td>Twilight (Twilight, #1)                                 </td><td>3866839</td><td>3.57</td></tr>
+	<tr><td>To Kill a Mockingbird                                   </td><td>3198671</td><td>4.25</td></tr>
+	<tr><td>The Great Gatsby                                        </td><td>2683664</td><td>3.89</td></tr>
+	<tr><td>The Fault in Our Stars                                  </td><td>2346404</td><td>4.26</td></tr>
+	<tr><td>The Hobbit                                              </td><td>2071616</td><td>4.25</td></tr>
+	<tr><td>The Catcher in the Rye                                  </td><td>2044241</td><td>3.79</td></tr>
+	<tr><td>Pride and Prejudice                                     </td><td>2035490</td><td>4.24</td></tr>
+	<tr><td>&lt;span style=white-space:pre-wrap&gt;Angels &amp; Demons  (Robert Langdon, #1)                   &lt;/span&gt;</td><td>2001311</td><td>3.85</td></tr>
+</tbody>
+</table>
+
+<h6 id="qué-influye-en-la-calificación-de-un-libro">¿Qué influye en la calificación de un libro?</h6>
+<p>A continuación, podemos ver si podemos encontrar asociaciones de características con la calificación de un libro.</p>
+
+<p>Para un vistazo rápido, primero grafiquemos la matriz de correlación entre el promedio de libros y algunas variables.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tmp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">one_of</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"books_count"</span><span class="p">,</span><span class="s2">"original_publication_year"</span><span class="p">,</span><span class="s2">"ratings_count"</span><span class="p">,</span><span class="w"> </span><span class="s2">"work_ratings_count"</span><span class="p">,</span><span class="w"> </span><span class="s2">"work_text_reviews_count"</span><span class="p">,</span><span class="w"> </span><span class="s2">"average_rating"</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as.matrix</span><span class="p">()</span><span class="w">
+
+</span><span class="n">corrplot</span><span class="p">(</span><span class="n">cor</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pairwise.complete.obs'</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_34_0.png" alt="quantifiers" /></p>
+
+<p>En resumen, solo vemos pequeñas correlaciones entre las características y la calificación promedio (última fila),
+lo que indica que no hay relaciones sólidas entre la calificación que recibe un libro y las metavariables
+(como la calificación cuenta, etc.).</p>
+
+<p>Esto significa que la calificación depende más de otras características (por ejemplo, la calidad de los libros en sí).</p>
+
+<h6 id="existe-una-relación-entre-el-número-de-calificaciones-y-la-calificación-promedio">¿Existe una relación entre el número de calificaciones y la calificación promedio?</h6>
+
+<p>Teóricamente, podría ser que la popularidad de un libro (en términos de la cantidad de calificaciones que recibe)
+está asociada con la calificación promedio que recibe, de modo que una vez que un libro se está volviendo popular,
+obtiene mejores calificaciones.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get_cor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">df</span><span class="p">){</span><span class="w">
+  </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cor</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">df</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="o">=</span><span class="s2">"pairwise.complete.obs"</span><span class="p">);</span><span class="w">
+  </span><span class="n">eq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">substitute</span><span class="p">(</span><span class="n">italic</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">cor</span><span class="p">,</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">cor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)))</span><span class="w">
+  </span><span class="nf">as.character</span><span class="p">(</span><span class="n">as.expression</span><span class="p">(</span><span class="n">eq</span><span class="p">));</span><span class="w">                 
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">ratings_count</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">1e+5</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">ratings_count</span><span class="p">,</span><span class="w"> </span><span class="n">average_rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stat_bin_hex</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">scale_fill_distiller</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Spectral"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">annotate</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">85000</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.7</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_cor</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="o">$</span><span class="n">ratings_count</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="o">$</span><span class="n">average_rating</span><span class="p">)),</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Numero de calificaciones vs rating promedio"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_37_0.png" alt="quantifiers" /></p>
+
+<p>Sin embargo, nuestros datos muestran que esto es cierto solo en un grado muy pequeño.</p>
+
+<p>La correlación entre estas variables es de solo 0.045.</p>
+
+<h6 id="múltiples-ediciones-de-cada-libro">Múltiples ediciones de cada libro.</h6>
+<p>El conjunto de datos contiene información sobre cuántas ediciones de un libro están disponibles en book_count.</p>
+
+<p>Estas pueden ser ediciones diferentes en el mismo idioma o también traducciones del libro a diferentes idiomas.</p>
+
+<p>Entonces, uno podría suponer que cuanto mejor sea el libro, más ediciones deberían estar disponibles.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">books_count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">500</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">books_count</span><span class="p">,</span><span class="w"> </span><span class="n">average_rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stat_bin_hex</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">scale_fill_distiller</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Spectral"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">annotate</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">400</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.7</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_cor</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="o">$</span><span class="n">books_count</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="o">$</span><span class="n">average_rating</span><span class="p">)),</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Ediciones de un libro vs rating promedio"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_40_0.png" alt="quantifiers" /></p>
+
+<p>De hecho, los datos muestran exactamente el patrón opuesto: cuantas más ediciones tenga un libro,
+menor será la calificación promedio.</p>
+
+<p>La dirección causal de esta asociación, por supuesto, no está clara aquí.</p>
+
+<h6 id="los-evaluadores-frecuentes-califican-de-manera-diferente">¿Los evaluadores frecuentes califican de manera diferente?</h6>
+
+<p>Es posible que los usuarios que califican más libros (calificadores frecuentes)
+califiquen los libros de manera diferente a los calificadores menos frecuentes.</p>
+
+<p>La siguiente figura explora esta posibilidad.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tmp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ratings</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">mean_rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rating</span><span class="p">),</span><span class="w"> </span><span class="n">number_of_rated_books</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w">
+
+</span><span class="n">tmp</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">number_of_rated_books</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">number_of_rated_books</span><span class="p">,</span><span class="w"> </span><span class="n">mean_rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stat_bin_hex</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">scale_fill_distiller</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Spectral"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">annotate</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.9</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_cor</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="o">$</span><span class="n">number_of_rated_books</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="o">$</span><span class="n">mean_rating</span><span class="p">)),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Usuarios que califican más de 100 libros"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_43_0.png" alt="quantifiers" /></p>
+
+<p>Parece que los evaluadores frecuentes tienden a dar calificaciones más bajas a los libros, tal vez sean / se vuelvan más críticos a medida que leen y califican. Eso es interesante.</p>
+
+<h6 id="serie-de-libros">Serie de libros</h6>
+
+<p>Los datos contienen información en la columna del título sobre si cierto libro es parte de una serie (por ejemplo, la trilogía de El señor de los anillos).</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">str_detect</span><span class="p">(</span><span class="n">str_to_lower</span><span class="p">(</span><span class="n">title</span><span class="p">),</span><span class="w"> </span><span class="s1">'\\(the lord of the rings'</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">book_id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">average_rating</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.frame: 4 × 3</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;book_id&lt;/th&gt;&lt;th scope=col&gt;title&lt;/th&gt;&lt;th scope=col&gt;average_rating&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;chr&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>   34</td><td>The Fellowship of the Ring (The Lord of the Rings, #1)</td><td>4.34</td></tr>
+	<tr><td>15241</td><td>The Two Towers (The Lord of the Rings, #2)            </td><td>4.42</td></tr>
+	<tr><td>18512</td><td>The Return of the King (The Lord of the Rings, #3)    </td><td>4.51</td></tr>
+	<tr><td>   33</td><td>The Lord of the Rings (The Lord of the Rings, #1-3)   </td><td>4.47</td></tr>
+</tbody>
+</table>
+
+<p>Dado esto, podemos extraer la serie del título, ya que siempre se da entre paréntesis, puede calcular características como el número de volúmenes en una serie, y así sucesivamente.</p>
+
+<p>A continuación, examino si los libros que forman parte de una serie más grande reciben una calificación más alta.
+De hecho, cuanto más volúmenes hay en una serie, mayor es la calificación promedio.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str_extract</span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="s2">"\\(.*\\)"</span><span class="p">),</span><span class="w">
+         </span><span class="n">series_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">str_sub</span><span class="p">(</span><span class="n">str_extract</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="s1">', #[0-9]+\\)$'</span><span class="p">),</span><span class="m">4</span><span class="p">,</span><span class="m">-2</span><span class="p">)),</span><span class="w">
+         </span><span class="n">series_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str_sub</span><span class="p">(</span><span class="n">str_extract</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="s1">'\\(.*,'</span><span class="p">),</span><span class="m">2</span><span class="p">,</span><span class="m">-2</span><span class="p">))</span><span class="w">
+
+</span><span class="n">tmp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">series_name</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">series_number</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">series_name</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">number_of_volumes_in_series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">(),</span><span class="w"> </span><span class="n">mean_rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">average_rating</span><span class="p">))</span><span class="w">
+
+</span><span class="n">tmp</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">number_of_volumes_in_series</span><span class="p">,</span><span class="w"> </span><span class="n">mean_rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stat_bin_hex</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">scale_fill_distiller</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Spectral"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">annotate</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">35</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.95</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_cor</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="o">$</span><span class="n">mean_rating</span><span class="p">,</span><span class="w">  </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="o">$</span><span class="n">number_of_volumes_in_series</span><span class="p">)),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Calificaciones en series de libros"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_48_0.png" alt="quantifiers" /></p>
+
+<h6 id="la-secuela-es-mejor-que-la-original">¿La secuela es mejor que la original?</h6>
+
+<p>También podemos ver que dentro de una serie, de hecho, la secuela tiene una calificación ligeramente mejor que la original.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">series_name</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">series_number</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">series_number</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">series_name</span><span class="p">,</span><span class="w"> </span><span class="n">series_number</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">average_rating</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ungroup</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">series_name</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">factor</span><span class="p">(</span><span class="n">series_number</span><span class="p">),</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">series_number</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coord_cartesian</span><span class="p">(</span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">5</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">guides</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Volume of series"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Average rating"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Original (rojo), contra Secuela (azul)"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_50_0.png" alt="quantifiers" /></p>
+
+<h6 id="cuánto-debe-durar-un-título">¿Cuánto debe durar un título?</h6>
+
+<p>Si eres autor, una de las opciones más importantes es el título de un libro.</p>
+
+<p>Por supuesto, el contenido del título es importante.
+Sin embargo, también podría importar cuánto dura el título.</p>
+
+<p>Por lo tanto, trazo la calificación promedio en función de la longitud del título (en palabras).</p>
+
+<p>Podemos ver que, de hecho, hay alguna variación en la calificación promedio dependiendo de la duración del título.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">title_cleaned</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str_trim</span><span class="p">(</span><span class="n">str_extract</span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="s1">'([0-9a-zA-Z]| |\'|,|\\.|\\*)*'</span><span class="p">)),</span><span class="w">
+         </span><span class="n">title_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str_count</span><span class="p">(</span><span class="n">title_cleaned</span><span class="p">,</span><span class="w"> </span><span class="s2">" "</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+
+</span><span class="n">tmp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">title_length</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarize</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">ind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">(</span><span class="n">title_length</span><span class="p">))</span><span class="w">
+
+</span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">factor</span><span class="p">(</span><span class="n">title_length</span><span class="p">),</span><span class="w"> </span><span class="n">average_rating</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">factor</span><span class="p">(</span><span class="n">title_length</span><span class="p">),</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="n">title_length</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">guides</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Title length"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">coord_cartesian</span><span class="p">(</span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2.2</span><span class="p">,</span><span class="m">4.7</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ind</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.25</span><span class="p">,</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"3 o 7 palabras parecen ligeramente mejores calificaciones"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_52_0.png" alt="quantifiers" /></p>
+
+<h6 id="tener-un-subtítulo-mejora-la-calificación-del-libro">¿Tener un subtítulo mejora la calificación del libro?</h6>
+
+<p>Vemos que los libros que tienen un subtítulo obtienen una calificación ligeramente más alta que los libros sin subtítulo.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str_detect</span><span class="p">(</span><span class="n">books</span><span class="o">$</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="s1">':'</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">subtitle</span><span class="p">))</span><span class="w">
+
+</span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">subtitle</span><span class="p">,</span><span class="w"> </span><span class="n">average_rating</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subtitle</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subtitle</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">guides</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Con subtitulo (rojo), Sin subtitulo (azul)"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_54_0.png" alt="quantifiers" /></p>
+
+<h6 id="importa-el-número-de-autores">¿Importa el número de autores?</h6>
+<p>Todos conocemos el dicho: “demasiados cocineros estropean el caldo”.</p>
+
+<p>¿Es esto también cierto para los libros? Mirando la trama a continuación,parece ser exactamente lo contrario: cuantos más autores tenga un libro, mayor será su calificación promedio.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">books</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">book_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">number_of_authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">str_split</span><span class="p">(</span><span class="n">authors</span><span class="p">,</span><span class="w"> </span><span class="s2">","</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]))</span><span class="w">
+
+</span><span class="n">books</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">number_of_authors</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">number_of_authors</span><span class="p">,</span><span class="w"> </span><span class="n">average_rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stat_bin_hex</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">scale_fill_distiller</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Spectral"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">annotate</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8.5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.75</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_cor</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="o">$</span><span class="n">number_of_authors</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="o">$</span><span class="n">average_rating</span><span class="p">)),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"orchid"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"más autores en un libro, mayor calificación promedio."</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_56_0.png" alt="quantifiers" /></p>
+
+<h2 id="resumen---parte-i">Resumen - Parte I</h2>
+
+<p>Identificamos algunos aspectos interesantes de los conjuntos de datos de libros y usuarios.</p>
+
+<p>En resumen, los efectos observados en la calificación del libro son bastante pequeños,
+lo que sugiere que la calificación del libro se debe principalmente a otros aspectos,
+con la esperanza de incluir la calidad del libro en sí.</p>
+
+<h1 id="parte-ii-filtrado-colaborativo">Parte II: Filtrado colaborativo</h1>
+
+<p>El filtrado colaborativo es un método estándar para recomendaciones de productos.</p>
+
+<p>Para obtener la idea general, veamos un ejemplo:</p>
+
+<p>Queremos leer un libro nuevo, pero no sabemos cuál vale la pena leer.
+Tenemos cierto amigo, con quien hablamos sobre libros y por lo general he tenido una opinión bastante similar sobre esos libros.
+Entonces sería una buena idea preguntarle a este amigo si leyó y le gustaron algunos libros que aún no conoce.</p>
+
+<p>Estos serían buenos candidatos para un próximo libro.</p>
+
+<p>Lo que describí anteriormente es exactamente la idea principal del llamado filtrado colaborativo basado en el usuario.</p>
+
+<p>Funciona de la siguiente manera:</p>
+
+<h6 id="1--primero-identificamos-a-otros-usuarios-similares-al-usuario-actual-en-términos-de-sus-calificaciones-en-el-mismo-conjunto-de-libros">1 . Primero identificamos a otros usuarios similares al usuario actual en términos de sus calificaciones en el mismo conjunto de libros.</h6>
+
+<p>Por ejemplo, si le gustaron todos los libros de “El señor de los anillos”, identifiqué a los usuarios que también les gustaron esos libros.</p>
+
+<h6 id="2-se-encuentra-usuarios-similares-tomo-su-calificación-promedio-de-libros-que-el-usuario-actual-aún-no-ha-leído-">2. Se encuentra usuarios similares, tomo su calificación promedio de libros que el usuario actual aún no ha leído …</h6>
+
+<p>Entonces, ¿cómo calificaron esos amantes del “Señor de los anillos” otros libros?
+Tal vez calificaron “El Hobbit” muy alto.</p>
+
+<h6 id="3-recomiendo-aquellos-libros-con-la-calificación-promedio-más-alta-para-él">3. Recomiendo aquellos libros con la calificación promedio más alta para él.</h6>
+
+<p>En consecuencia, “El Hobbit” tiene una calificación promedio alta y podría recomendarlo.</p>
+
+<h3 id="estos-tres-pasos-se-pueden-traducir-fácilmente-en-un-algoritmo">Estos tres pasos se pueden traducir fácilmente en un algoritmo.</h3>
+
+<p>Sin embargo, antes de que podamos hacer eso, tenemos que reestructurar nuestros datos.</p>
+
+<p>Para el filtrado colaborativo, los datos generalmente se estructuran para que cada fila corresponda a un usuario
+y cada columna corresponda a un libro.</p>
+
+<p>Esto podría verse así, por ejemplo, para 3 usuarios y 5 libros, tenemos 3 filas y 5 columnas.</p>
+
+<p>Tenga en cuenta que no todos los usuarios calificaron cada libro.</p>
+
+<p>Por ejemplo, el usuario 1 solo calificó el libro 3, mientras que el usuario 2 calificó el libro 1 y el libro 2.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.table: 6 × 4</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;book_id&lt;/th&gt;&lt;th scope=col&gt;user_id&lt;/th&gt;&lt;th scope=col&gt;rating&lt;/th&gt;&lt;th scope=col&gt;N&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td> 1169</td><td>4</td><td>187</td></tr>
+	<tr><td>1</td><td> 1185</td><td>4</td><td>190</td></tr>
+	<tr><td>1</td><td> 3662</td><td>4</td><td>185</td></tr>
+	<tr><td>1</td><td>12471</td><td>5</td><td>192</td></tr>
+	<tr><td>1</td><td>13282</td><td>5</td><td>182</td></tr>
+	<tr><td>1</td><td>13544</td><td>5</td><td>183</td></tr>
+</tbody>
+</table>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Para reestructurar nuestros datos de calificación de este conjunto de datos de la misma manera,</span><span class="w">
+</span><span class="c1">#podemos hacer lo siguiente:</span><span class="w">
+
+</span><span class="n">dimension_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">ratings</span><span class="o">$</span><span class="n">user_id</span><span class="p">)),</span><span class="w"> </span><span class="n">book_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">ratings</span><span class="o">$</span><span class="n">book_id</span><span class="p">)))</span><span class="w">
+</span><span class="n">ratingmat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">spread</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">ratings</span><span class="p">,</span><span class="w"> </span><span class="n">book_id</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">rating</span><span class="p">),</span><span class="w"> </span><span class="n">book_id</span><span class="p">,</span><span class="w"> </span><span class="n">rating</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">user_id</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ratingmat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.matrix</span><span class="p">(</span><span class="n">ratingmat</span><span class="p">)</span><span class="w">
+</span><span class="nf">dimnames</span><span class="p">(</span><span class="n">ratingmat</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dimension_names</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ratingmat</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span><span class="w">
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"Matriz con filas (usuarios) y columnas (libros) : "</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">(</span><span class="n">ratingmat</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A matrix: 5 × 5 of type int</caption>
+<thead>
+	<tr><th></th>&lt;th scope=col&gt;1&lt;/th&gt;&lt;th scope=col&gt;2&lt;/th&gt;&lt;th scope=col&gt;3&lt;/th&gt;&lt;th scope=col&gt;4&lt;/th&gt;&lt;th scope=col&gt;5&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr>&lt;th scope=row&gt;2&lt;/th&gt;<td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
+	<tr>&lt;th scope=row&gt;4&lt;/th&gt;<td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
+	<tr>&lt;th scope=row&gt;5&lt;/th&gt;<td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
+	<tr>&lt;th scope=row&gt;9&lt;/th&gt;<td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
+	<tr>&lt;th scope=row&gt;10&lt;/th&gt;<td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
+</tbody>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> int [1:9003, 1:9999] NA NA NA NA NA NA NA NA NA NA ...
+ - attr(*, "dimnames")=List of 2
+  ..$ user_id: chr [1:9003] "2" "4" "5" "9" ...
+  ..$ book_id: chr [1:9999] "1" "2" "3" "4" ...
+Matriz con filas (usuarios) y columnas (libros) :
+</code></pre></div></div>
+
+<p>Vemos que nuestra matriz de calificación tiene 9003 filas x 9999 columnas, que son muchos elementos de matriz.</p>
+
+<p>Ok, ahora tenemos los datos.</p>
+
+<h6 id="es-hora-de-seguir-nuestros-3-pasos">Es hora de seguir nuestros 3 pasos:</h6>
+
+<h6 id="paso-1-busca-usuarios-similares">Paso 1: busca usuarios similares</h6>
+
+<p>Para este paso seleccionamos usuarios que tienen en común calificaciones en los mismos libros.</p>
+
+<p>Para hacerlo más fácil, seleccione un usuario de ejemplo “David” (user_id: 17329).</p>
+
+<p>Primero seleccionamos a los usuarios que calificaron al menos un libro que David también calificó.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">current_user</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"17329"</span><span class="w">
+</span><span class="c1">#Seleccion de libros de un usuario</span><span class="w">
+</span><span class="n">rated_items</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">which</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">((</span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">ratingmat</span><span class="p">[</span><span class="n">current_user</span><span class="p">,</span><span class="w"> </span><span class="p">]))))</span><span class="w">
+</span><span class="c1">#Usuario con al menos un libro seleccionado por David</span><span class="w">
+</span><span class="n">selected_users</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="n">apply</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">ratingmat</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="n">rated_items</span><span class="p">]),</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">selected_users</span><span class="p">,</span><span class="w"> </span><span class="m">40</span><span class="p">)</span><span class="w"> </span><span class="c1">#Encabezados con libro en comun con David</span><span class="w">
+</span></code></pre></div></div>
+
+<p>&lt;ol class=list-inline&gt;
+	&lt;li&gt;‘35’&lt;/li&gt;
+	&lt;li&gt;‘153’&lt;/li&gt;
+	&lt;li&gt;‘158’&lt;/li&gt;
+	&lt;li&gt;‘202’&lt;/li&gt;
+	&lt;li&gt;‘343’&lt;/li&gt;
+	&lt;li&gt;‘368’&lt;/li&gt;
+	&lt;li&gt;‘958’&lt;/li&gt;
+	&lt;li&gt;‘1169’&lt;/li&gt;
+	&lt;li&gt;‘1185’&lt;/li&gt;
+	&lt;li&gt;‘1339’&lt;/li&gt;
+	&lt;li&gt;‘1449’&lt;/li&gt;
+	&lt;li&gt;‘1456’&lt;/li&gt;
+	&lt;li&gt;‘1464’&lt;/li&gt;
+	&lt;li&gt;‘1518’&lt;/li&gt;
+	&lt;li&gt;‘1571’&lt;/li&gt;
+	&lt;li&gt;‘1634’&lt;/li&gt;
+	&lt;li&gt;‘1677’&lt;/li&gt;
+	&lt;li&gt;‘1759’&lt;/li&gt;
+	&lt;li&gt;‘2166’&lt;/li&gt;
+	&lt;li&gt;‘2218’&lt;/li&gt;
+	&lt;li&gt;‘2347’&lt;/li&gt;
+	&lt;li&gt;‘2421’&lt;/li&gt;
+	&lt;li&gt;‘2467’&lt;/li&gt;
+	&lt;li&gt;‘2619’&lt;/li&gt;
+	&lt;li&gt;‘3050’&lt;/li&gt;
+	&lt;li&gt;‘3075’&lt;/li&gt;
+	&lt;li&gt;‘3246’&lt;/li&gt;
+	&lt;li&gt;‘3263’&lt;/li&gt;
+	&lt;li&gt;‘3399’&lt;/li&gt;
+	&lt;li&gt;‘3580’&lt;/li&gt;
+	&lt;li&gt;‘3641’&lt;/li&gt;
+	&lt;li&gt;‘3662’&lt;/li&gt;
+	&lt;li&gt;‘3757’&lt;/li&gt;
+	&lt;li&gt;‘3796’&lt;/li&gt;
+	&lt;li&gt;‘4005’&lt;/li&gt;
+	&lt;li&gt;‘4204’&lt;/li&gt;
+	&lt;li&gt;‘4242’&lt;/li&gt;
+	&lt;li&gt;‘4276’&lt;/li&gt;
+	&lt;li&gt;‘4289’&lt;/li&gt;
+	&lt;li&gt;‘4489’&lt;/li&gt;
+&lt;/ol&gt;</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="p">(</span><span class="s2">"En total hay 440 usuarios que tienen al menos un libro en común."</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">(</span><span class="n">selected_users</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> chr [1:440] "35" "153" "158" "202" "343" "368" "958" "1169" "1185" "1339" ...
+En total hay 440 usuarios que tienen al menos un libro en común.
+</code></pre></div></div>
+
+<p>Para estos usuarios, podemos calcular la similitud de sus calificaciones con las calificaciones de “David”.</p>
+
+<p>Hay varias opciones para calcular la similitud.</p>
+
+<p>Por lo general, se utilizan la similitud del coseno o el coeficiente de correlación de Pearson.</p>
+
+<p>Aquí, elegí la correlación de pearson.
+Ahora revisaremos todos los usuarios seleccionados y calcularemos la similitud entre sus calificaciones y las de David.</p>
+
+<p>A continuación hago esto para 2 usuarios (user_ids: 1339 y 21877) a modo de ilustración.
+Podemos ver que la similitud es mayor para el usuario 1339 que para el usuario 21877</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Usuario actual 17329</span><span class="w">
+</span><span class="n">user1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">colnames</span><span class="p">(</span><span class="n">ratingmat</span><span class="p">),</span><span class="n">rating</span><span class="o">=</span><span class="n">ratingmat</span><span class="p">[</span><span class="n">current_user</span><span class="p">,])</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w">
+</span><span class="c1">#Usuario 1329, almenos un libro en comun</span><span class="w">
+</span><span class="n">user2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">colnames</span><span class="p">(</span><span class="n">ratingmat</span><span class="p">),</span><span class="n">rating</span><span class="o">=</span><span class="n">ratingmat</span><span class="p">[</span><span class="s2">"1339"</span><span class="p">,])</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w">
+</span><span class="n">tmp</span><span class="o">&lt;-</span><span class="n">merge</span><span class="p">(</span><span class="n">user1</span><span class="p">,</span><span class="w"> </span><span class="n">user2</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s2">"item"</span><span class="p">)</span><span class="w">
+</span><span class="n">tmp</span><span class="w">
+
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"Coeficiente de correlacion con el usuario 1329 : "</span><span class="p">,</span><span class="w"> </span><span class="n">cor</span><span class="p">(</span><span class="n">tmp</span><span class="o">$</span><span class="n">rating.x</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="o">$</span><span class="n">rating.y</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="o">=</span><span class="s2">"pairwise.complete.obs"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.frame: 3 × 3</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;item&lt;/th&gt;&lt;th scope=col&gt;rating.x&lt;/th&gt;&lt;th scope=col&gt;rating.y&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;fct&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>1258</td><td>4</td><td>5</td></tr>
+	<tr><td>1662</td><td>4</td><td>5</td></tr>
+	<tr><td>1757</td><td>3</td><td>3</td></tr>
+</tbody>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Coeficiente de correlacion con el usuario 1329 :  1
+</code></pre></div></div>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Usuario 21877</span><span class="w">
+</span><span class="n">user2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colnames</span><span class="p">(</span><span class="n">ratingmat</span><span class="p">),</span><span class="w"> </span><span class="n">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ratingmat</span><span class="p">[</span><span class="s2">"21877"</span><span class="p">,</span><span class="w"> </span><span class="p">])</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w">
+</span><span class="n">tmp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">user1</span><span class="p">,</span><span class="w"> </span><span class="n">user2</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s2">"item"</span><span class="p">)</span><span class="w">
+</span><span class="n">tmp</span><span class="w">
+
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"Coeficiente de correlacion con el usuario 21877 : "</span><span class="p">,</span><span class="n">cor</span><span class="p">(</span><span class="n">tmp</span><span class="o">$</span><span class="n">rating.x</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="o">$</span><span class="n">rating.y</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="o">=</span><span class="s2">"pairwise.complete.obs"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.frame: 4 × 3</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;item&lt;/th&gt;&lt;th scope=col&gt;rating.x&lt;/th&gt;&lt;th scope=col&gt;rating.y&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;fct&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;int&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>105 </td><td>4</td><td>3</td></tr>
+	<tr><td>1365</td><td>3</td><td>4</td></tr>
+	<tr><td>1584</td><td>1</td><td>5</td></tr>
+	<tr><td>318 </td><td>4</td><td>4</td></tr>
+</tbody>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Coeficiente de correlacion con el usuario 21877 :  -0.8660254
+</code></pre></div></div>
+
+<p>Podemos calcular la similitud de todos los demás usuarios con David y clasificarlos según la mayor similitud.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rmat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ratingmat</span><span class="p">[</span><span class="n">selected_users</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="n">user_mean_ratings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rowMeans</span><span class="p">(</span><span class="n">rmat</span><span class="p">,</span><span class="n">na.rm</span><span class="o">=</span><span class="nb">T</span><span class="p">)</span><span class="w">
+</span><span class="n">rmat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rmat</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">user_mean_ratings</span><span class="w">
+
+</span><span class="n">similarities</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cor</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">rmat</span><span class="p">[</span><span class="n">rownames</span><span class="p">(</span><span class="n">rmat</span><span class="p">)</span><span class="o">!=</span><span class="n">current_user</span><span class="p">,</span><span class="w"> </span><span class="p">]),</span><span class="w"> </span><span class="n">rmat</span><span class="p">[</span><span class="n">current_user</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pairwise.complete.obs'</span><span class="p">)</span><span class="w">
+</span><span class="n">sim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.vector</span><span class="p">(</span><span class="n">similarities</span><span class="p">)</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rownames</span><span class="p">(</span><span class="n">similarities</span><span class="p">)</span><span class="w">
+</span><span class="n">res</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">sort</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Warning message in cor(t(rmat[rownames(rmat) != current_user, ]), rmat[current_user, :
+“the standard deviation is zero”
+</code></pre></div></div>
+
+<p>&lt;dl class=dl-horizontal&gt;
+	&lt;dt&gt;1339&lt;/dt&gt;
+		&lt;dd&gt;1&lt;/dd&gt;
+	&lt;dt&gt;1449&lt;/dt&gt;
+		&lt;dd&gt;1&lt;/dd&gt;
+	&lt;dt&gt;2347&lt;/dt&gt;
+		&lt;dd&gt;1&lt;/dd&gt;
+	&lt;dt&gt;6290&lt;/dt&gt;
+		&lt;dd&gt;1&lt;/dd&gt;
+	&lt;dt&gt;8682&lt;/dt&gt;
+		&lt;dd&gt;1&lt;/dd&gt;
+&lt;/dl&gt;</p>
+
+<p>Ahora podemos seleccionar los 4 usuarios más similares: 1339, 1449, 2347, 6290</p>
+
+<h5 id="visualizando-similitudes-entre-usuarios">Visualizando similitudes entre usuarios</h5>
+<p>Las similitudes entre los usuarios se pueden visualizar utilizando el paquete qpraph.</p>
+
+<p>El ancho de los bordes del gráfico corresponde a la similitud (azul para correlaciones positivas, rojo para correlaciones negativas).</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sim_mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cor</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">rmat</span><span class="p">),</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pairwise.complete.obs'</span><span class="p">)</span><span class="w">
+</span><span class="n">random_users</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">selected_users</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">]</span><span class="w">
+</span><span class="n">qgraph</span><span class="p">(</span><span class="n">sim_mat</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="n">current_user</span><span class="p">,</span><span class="w"> </span><span class="n">random_users</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">current_user</span><span class="p">,</span><span class="w"> </span><span class="n">random_users</span><span class="p">)],</span><span class="w"> </span><span class="n">layout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"spring"</span><span class="p">,</span><span class="w"> </span><span class="n">vsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"TeamFortress"</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">current_user</span><span class="p">,</span><span class="w"> </span><span class="n">random_users</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Warning message in cor(t(rmat), use = "pairwise.complete.obs"):
+“the standard deviation is zero”Warning message in qgraph(sim_mat[c(current_user, random_users), c(current_user, :
+“Non-finite weights are omitted”
+</code></pre></div></div>
+
+<p><img src="/images/Recomendador/output_75_1.png" alt="quantifiers" /></p>
+
+<h6 id="paso-2-predicciones-para-otros-libros">Paso 2: Predicciones para otros libros</h6>
+<p>Para obtener recomendaciones para nuestro usuario, tomaríamos los usuarios más similares (por ejemplo, 4)
+y promediaríamos sus calificaciones para los libros que David aún no ha calificado.</p>
+
+<p>Para que estos promedios sean más confiables, también podemos incluir solo elementos que hayan sido calificados
+por varios otros usuarios similares.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">similar_users</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">])</span><span class="w">
+
+</span><span class="n">similar_users_ratings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="n">colnames</span><span class="p">(</span><span class="n">rmat</span><span class="p">),</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">similar_users</span><span class="p">)),</span><span class="w"> </span><span class="n">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">rmat</span><span class="p">[</span><span class="n">similar_users</span><span class="p">,]))))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w">
+
+</span><span class="n">current_user_ratings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colnames</span><span class="p">(</span><span class="n">rmat</span><span class="p">),</span><span class="w"> </span><span class="n">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rmat</span><span class="p">[</span><span class="n">current_user</span><span class="p">,])</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w">
+
+</span><span class="n">predictions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">similar_users_ratings</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">current_user_ratings</span><span class="o">$</span><span class="n">item</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">summarize</span><span class="p">(</span><span class="n">mean_rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span><span class="w">
+
+</span><span class="n">predictions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predictions</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">predictions</span><span class="o">$</span><span class="n">mean_rating</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),]</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span><span class="m">10</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A tibble: 10 × 2</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;item&lt;/th&gt;&lt;th scope=col&gt;mean_rating&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;fct&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>1031</td><td>1.754386</td></tr>
+	<tr><td>2004</td><td>1.754386</td></tr>
+	<tr><td>3934</td><td>1.754386</td></tr>
+	<tr><td>5524</td><td>1.754386</td></tr>
+	<tr><td>7239</td><td>1.754386</td></tr>
+	<tr><td>1005</td><td>1.528846</td></tr>
+	<tr><td>378 </td><td>1.528846</td></tr>
+	<tr><td>779 </td><td>1.528846</td></tr>
+	<tr><td>857 </td><td>1.528846</td></tr>
+	<tr><td>867 </td><td>1.528846</td></tr>
+</tbody>
+</table>
+
+<h6 id="paso-3-recomiende-las-5-mejores-predicciones">Paso 3: Recomiende las 5 mejores predicciones</h6>
+<p>Dados los resultados, clasificaríamos las predicciones con respecto a su calificación promedio y recomendaríamos los libros mejor calificados a David.</p>
+
+<p>En nuestro caso serían los libros 1031, 2004, 3934, 5524, 7239.</p>
+
+<p>Tengamos en cuenta que normalizamos la base, para evitar sesto y centrar mejor los datos.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">predictions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">mean_rating</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">top_n</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">wt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean_rating</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">book_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">left_join</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">books</span><span class="p">,</span><span class="w"> </span><span class="n">authors</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">book_id</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"book_id"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">item</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A tibble: 5 × 4</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;mean_rating&lt;/th&gt;&lt;th scope=col&gt;book_id&lt;/th&gt;&lt;th scope=col&gt;authors&lt;/th&gt;&lt;th scope=col&gt;title&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;chr&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;chr&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>1.754386</td><td>1031</td><td>NA</td><td>NA</td></tr>
+	<tr><td>1.754386</td><td>2004</td><td>NA</td><td>NA</td></tr>
+	<tr><td>1.754386</td><td>3934</td><td>NA</td><td>NA</td></tr>
+	<tr><td>1.754386</td><td>5524</td><td>NA</td><td>NA</td></tr>
+	<tr><td>1.754386</td><td>7239</td><td>NA</td><td>NA</td></tr>
+</tbody>
+</table>
+
+<p>Y eso ya es todo.</p>
+
+<p>Este es el principio básico del filtrado colaborativo basado en el usuario.</p>
+
+<p>Ahora podemos ser más prácticos y evaluar y comparar algunos algoritmos de recomendación.</p>
+
+<h4 id="usando-recomenderlab">Usando recomenderlab</h4>
+
+<p>Recomenderlab es un paquete R. Proporciona una infraestructura de investigación para probar y desarrollar algoritmos de recomendación que incluyen UBCF, IBCF, FunkSVD y algoritmos basados en reglas de asociación.</p>
+
+<p>El paquete admite conjuntos de datos de clasificación (p. Ej., 1-5 estrellas) y unarios (0-1).
+Los algoritmos admitidos son:</p>
+
+<ul>
+  <li>Filtrado colectivo basado en el usuario (UBCF)</li>
+  <li>Filtrado colectivo basado en elementos (IBCF)</li>
+  <li>SVD con imputación media de columna (SVD)</li>
+  <li>Funk SVD (SVDF)</li>
+  <li>Mínimos cuadrados alternos (ALS)</li>
+  <li>Factorización de matrices con LIBMF (LIBMF)</li>
+  <li>Asociación recomendada basada en reglas (AR)</li>
+  <li>Artículos populares (POPULARES)</li>
+  <li>Elementos elegidos al azar para la comparación (ALEATORIO)</li>
+  <li>Vuelva a recomendar los artículos que le gustaron (RECOMENDAR)</li>
+  <li>Recomendaciones híbridas (HybridRecommender)</li>
+</ul>
+
+<p>Para la evaluación, el marco admite protocolos dados-n y todo-pero-x con</p>
+
+<p>Muchos algoritmos ya están implementados en el paquete, y podemos usar los disponibles para ahorrar algo de
+esfuerzo de codificación, o agregar algoritmos personalizados y usar la infraestructura (por ejemplo, validación cruzada).</p>
+
+<p>Hay un aspecto importante con respecto a la representación de nuestra matriz de calificación.</p>
+
+<p>Como ya pudimos ver arriba, faltan la mayoría de los valores en la matriz de calificación,porque cada usuario acaba de calificar algunos de los 10000 libros.</p>
+
+<p>Esto nos permite representar esta matriz en un formato escaso para ahorrar memoria.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ratingmat0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ratingmat</span><span class="w">
+</span><span class="n">ratingmat0</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">ratingmat0</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span><span class="n">sparse_ratings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as</span><span class="p">(</span><span class="n">ratingmat0</span><span class="p">,</span><span class="w"> </span><span class="s2">"sparseMatrix"</span><span class="p">)</span><span class="w">
+</span><span class="n">rm</span><span class="p">(</span><span class="n">ratingmat0</span><span class="p">)</span><span class="w">
+</span><span class="n">gc</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A matrix: 2 × 6 of type dbl</caption>
+<thead>
+	<tr><th></th>&lt;th scope=col&gt;used&lt;/th&gt;&lt;th scope=col&gt;(Mb)&lt;/th&gt;&lt;th scope=col&gt;gc trigger&lt;/th&gt;&lt;th scope=col&gt;(Mb)&lt;/th&gt;&lt;th scope=col&gt;max used&lt;/th&gt;&lt;th scope=col&gt;(Mb)&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr>&lt;th scope=row&gt;Ncells&lt;/th&gt;<td> 2423528</td><td>129.5</td><td>  4703850</td><td> 251.3</td><td>  4703850</td><td> 251.3</td></tr>
+	<tr>&lt;th scope=row&gt;Vcells&lt;/th&gt;<td>60347225</td><td>460.5</td><td>277139965</td><td>2114.5</td><td>330762405</td><td>2523.6</td></tr>
+</tbody>
+</table>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Recommendedderlab utiliza como una variante especial de matrices dispersas,</span><span class="w">
+</span><span class="c1">#por lo que primero convertimos a esta clase.</span><span class="w">
+
+</span><span class="n">real_ratings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">new</span><span class="p">(</span><span class="s2">"realRatingMatrix"</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sparse_ratings</span><span class="p">)</span><span class="w">
+</span><span class="n">real_ratings</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9003 x 9999 rating matrix of class ‘realRatingMatrix’ with 191512 ratings.
+</code></pre></div></div>
+
+<p>Ejecutar un algoritmo en Recomenderlab es realmente fácil.</p>
+
+<p>Todo lo que tenemos que hacer es utilizar la función Recomender() y pasar los datos,
+seleccionar un método (“UBCF” - filtrado colaborativo basado en el usuario) y pasar algunos parámetros (por ejemplo, el método para calcular la similitud, por ejemplo, Pearson, y el número de usuarios similares utilizados para las predicciones, nn, p. ej. 4).</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Recommender</span><span class="p">(</span><span class="n">real_ratings</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UBCF"</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"pearson"</span><span class="p">,</span><span class="w"> </span><span class="n">nn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>La creación de predicciones también es sencilla.</p>
+
+<p>Simplemente pasando a la función a predict() el modelo, las calificaciones para el usuario para el que deseamos predecir las calificaciones y un parámetro para indicarle a la función las calificaciones pronosticadas.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Predicciones</span><span class="w">
+</span><span class="n">prediction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">real_ratings</span><span class="p">[</span><span class="n">current_user</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ratings"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Echemos un vistazo a las mejores predicciones para David:</span><span class="w">
+
+</span><span class="n">as</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span><span class="w"> </span><span class="s1">'data.frame'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">rating</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">.</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">book_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">left_join</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">books</span><span class="p">,</span><span class="w"> </span><span class="n">authors</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">book_id</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"book_id"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">item</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<caption>A data.frame: 5 × 5</caption>
+<thead>
+	<tr>&lt;th scope=col&gt;user&lt;/th&gt;&lt;th scope=col&gt;rating&lt;/th&gt;&lt;th scope=col&gt;book_id&lt;/th&gt;&lt;th scope=col&gt;authors&lt;/th&gt;&lt;th scope=col&gt;title&lt;/th&gt;</tr>
+	<tr>&lt;th scope=col&gt;&lt;fct&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;dbl&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;chr&gt;&lt;/th&gt;&lt;th scope=col&gt;&lt;chr&gt;&lt;/th&gt;</tr>
+</thead>
+<tbody>
+	<tr><td>17329</td><td>4.079354</td><td> 523</td><td>NA</td><td>NA</td></tr>
+	<tr><td>17329</td><td>3.850361</td><td>1031</td><td>NA</td><td>NA</td></tr>
+	<tr><td>17329</td><td>3.850361</td><td>2004</td><td>NA</td><td>NA</td></tr>
+	<tr><td>17329</td><td>3.850361</td><td>3934</td><td>NA</td><td>NA</td></tr>
+	<tr><td>17329</td><td>3.850361</td><td>5524</td><td>NA</td><td>NA</td></tr>
+</tbody>
+</table>
+
+<p>Vemos que las recomendaciones son casi las mismas en comparación con nuestro algoritmo descrito anteriormente.</p>
+
+<p>Los 4 mejores libros recomendados son exactamente los mismos.</p>
+
+<h2 id="resumen-parte-ii">Resumen Parte II</h2>
+
+<p>En el filtrado colaborativo, la idea principal es usar calificaciones de usuarios similares para crear recomendaciones.</p>
+
+<h1 id="parte-iii-definición-reas-entorno-de-trabajo">Parte III: Definición REAS, entorno de trabajo.</h1>
+
+<ul>
+  <li>Rendimiento: Recomendaciones adecuadas para tomar en cuenta.</li>
+  <li>Entorno: Calificar libros</li>
+  <li>Actuadores: Filtrado colaborativo</li>
+  <li>Sensores: Matriz usuario y libros</li>
+</ul>
+
+<h6 id="entorno-de-trabajo">Entorno de Trabajo</h6>
+
+<ul>
+  <li>Totalmente Observable: Los sensores detectan todos los aspectos relevantes.</li>
+  <li>Determinista: El siguiente estado está totalmente determinado por su estado actual.</li>
+  <li>Secuencial: Una desición presente afecta desiciones futuras.</li>
+  <li>Dinámico: El entorno cambia.</li>
+  <li>Continuo: No es posible enumerar los estados.</li>
+  <li>Agente individual: Un solo agente resolviendo el problema.</li>
+</ul>
+
+<h6 id="ventajas-del-agente">Ventajas del agente</h6>
+
+<ul>
+  <li>Busca la similitud de un usuario para recomendar</li>
+  <li>Nos ayuda a conocer el comportamiento de usuarios</li>
+</ul>
+
+<h6 id="desventajas-del-agente">Desventajas del agente</h6>
+
+<ul>
+  <li>Es necesario tener una buena base de datos, estructurada y grande</li>
+  <li>Entre más datos tengamos mayor computo necesitamos para los algoritmos</li>
+</ul>
+
+<h1 id="parte-iv-implementación-de-aplicación-con-shiny-r">Parte IV: Implementación de aplicación con Shiny R.</h1>
+
+<h5 id="consideraciones-generales">Consideraciones Generales</h5>
+
+<p>La aplicación se encuentra en la carpeta RecomendacionLibros.Los archivos principales de la aplicación son:</p>
+
+<ul>
+  <li>
+    <p>server.R, Script con el motor de la aplicación (Llama a los script cf_algoritms y similarity_measures.R)</p>
+
+    <ol>
+      <li>
+        <p>cf_algorithm.R, contiene le algoritmo de filtrado colaborativo y la función de predicción.</p>
+      </li>
+      <li>
+        <p>simililarity_measure.R contiene funciones para calcular matrices de similitud.</p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>uir.R, Script con el diseño de la aplicacioón (Llama al script helpesr.R)</p>
+
+    <ol>
+      <li>helpesr.R contiene estilos css.</li>
+    </ol>
+  </li>
+</ul>
+
+<h6 id="aplicación-shiny">Aplicación Shiny</h6>
+
+<p>Para crear la aplicación shiny, tomé la implementación de filtrado colaborativo descrito arriba.</p>
+
+<p>Los datos deben proporcionarse como una matriz de libro x usuario (en contraste con la matriz de usuario x libro que utilicé anteriormente).</p>
+
+<p>También submuestreé solo el 20% de los datos de calificación para aumentar aún más la velocidad.</p>
+
+<h5 id="obteniendo-las-predicciones">Obteniendo las predicciones</h5>
+
+<p>Se toman las calificaciones de los nuevos usuarios (como un ejemplo del usuario actual), ejecuta la predicción y luego organiza los resultados de la predicción como las 20 recomendaciones principales.</p>
+
+<h6 id="construyendo-la-aplicación">Construyendo la aplicación</h6>
+
+<p>La construcción y el despliegue reales de la aplicación también son realmente fáciles, esta alojada en un servidor web que R tienen para aplicaciones.</p>
+
+<p>Todo ocurre con los archivos ui.R y server.R.</p>
+
+<p>La interfaz de IU estática, que es básicamente un tablero con dos cuadros grandes (uno para las calificaciones de los usuarios y otro para las recomendaciones).</p>
+
+<p>server.R primero llena el cuadro de calificación del usuario con libros que se pueden calificar,luego calcula las recomendaciones cuando el usuario presiona el botón y, en tercer lugar,llena el cuadro de las recomendaciones.</p>
+
+<p>Simplemente creé una cuenta en shinyapps.io configure mi Rstudio para publicar mi aplicación.
+Aquí como subir aplicaciones shiny a la web.</p>
+
+<p>(https://docs.rstudio.com/shinyapps.io/getting-started.html)</p>
+
+<h2 id="resumen-parte-iv">Resumen Parte IV</h2>
+
+<p>Eso es. Cuando comencé este proyecto, no había hecho demasiado filtrado colaborativo, pero después de ver este conjunto de datos,me fascinó crear una aplicación de recomendación de libros de trabajo.</p>
+
+<p>Todavía hay margen de mejora.</p>
+
+<p>si necesitamos conocer que libor leer sabemos a donder ir :-):</p>
+
+<p>(https://philippsp.shinyapps.io/BookRecommendation/)</p>
+
+<h6 id="bibliografías">Bibliografías:</h6>
+
+<ul>
+  <li>
+    <p>R for data sciences (https://r4ds.had.co.nz/)</p>
+  </li>
+  <li>
+    <p>Advanced Machine Learning with R por Cory Lesmeister (Autor), Chinnamgari (Autor)</p>
+  </li>
+</ul>
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/book-review/python-gui-book-review/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> Creating GUI Applications with wxPython - book review
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/cheatsheet/python/python-regex-cheatsheet/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Python regular expression cheatsheet and examples
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2020 Ciencia de Datos. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

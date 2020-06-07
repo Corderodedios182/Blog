@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Creating GUI Applications with wxPython - book review | Ciencia de Datos</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Creating GUI Applications with wxPython - book review" />
+<meta name="author" content="Carlos Flores" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Hacer es a menudo mejor que pensar en hacerlo" />
+<meta property="og:description" content="Hacer es a menudo mejor que pensar en hacerlo" />
+<link rel="canonical" href="http://localhost:4000/book-review/python-gui-book-review/" />
+<meta property="og:url" content="http://localhost:4000/book-review/python-gui-book-review/" />
+<meta property="og:site_name" content="Ciencia de Datos" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-13T06:02:19-05:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/book-review/python-gui-book-review/","headline":"Creating GUI Applications with wxPython - book review","dateModified":"2019-05-13T06:02:19-05:00","datePublished":"2019-05-13T06:02:19-05:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/lbe_logo.png"},"name":"Carlos Flores"},"author":{"@type":"Person","name":"Carlos Flores"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/book-review/python-gui-book-review/"},"description":"Hacer es a menudo mejor que pensar en hacerlo","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  creating-gui-applications-with-wxpython-book-review">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/posts/">Posts</a></li><li><a href="/books/">Books</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Ciencia de Datos">
+        <img src="/images/lbe_logo.png" class="site-logo-img animated fadeInDown" alt="Ciencia de Datos">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Ciencia de Datos</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Hacer es a menudo mejor que pensar en hacerlo</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Creating GUI Applications with wxPython - book review
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info"><div class="author-name">
+        <span class="p-name">Carlos Flores</span>
+      </div><ul class="author-links"><li class="author-link">
+            <a class="u-url" rel="me" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-lg" title="GitHub"></i></a>
+          </li><li class="author-link">
+            <a class="u-url" rel="me" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-lg" title="Linkedin"></i></a>
+          </li></ul>
+
+<span class="read-time">4 min read</span>
+
+    <time class="page-date dt-published" datetime="2019-05-13T06:02:19-05:00"><a class="u-url" href="">May 13, 2019</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a class="p-category" href="/categories/#book-review" title="Pages filed under book-review">book-review</a></li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#gui" title="Pages tagged gui" rel="tag">gui</a></li><li class="page-taxonomy"><a href="/tags/#python" title="Pages tagged python" rel="tag">python</a></li><li class="page-taxonomy"><a href="/tags/#wxpython" title="Pages tagged wxpython" rel="tag">wxpython</a></li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <p><img src="http://localhost:4000/images/python_gui/GUI_example.jpg" alt="GUI example" class="align-center" /></p>
+
+<p><em>Photo Credit: <a href="https://www.pexels.com/photo/apple-computer-desk-devices-326501/">Tranmautritam</a> on <a href="https://www.pexels.com/">Pexels</a></em></p>
+
+<p>I’ve always wanted to create nice looking, useful GUI applications over the years. And I’ve given up most of the time as the programming seemed too difficult for me and GUI requires at least some level of design skills. I only managed to grit through one Android app for over a year as it was a dream game from school days and I had loads of free time having quit my job. At the end of it though, I had a spaghetti mess of several 1000+ lines programs and a strong aversion to Java and object oriented programming. Part of the reason is that I didn’t try to learn in a formal way, just started from a tutorial closest to the game I wanted to do.</p>
+
+<p>Several years later, here I am, trying my hand with GUI again. I have several small to medium scale apps in mind to implement and hopefully I’ll avoid previous mistakes, especially feature creep. When I saw <a href="https://twitter.com/driscollis/status/1109106540160733184">this tweet from Mike Driscoll</a>, I took up the offer. I got a free book in exchange for reviewing <a href="https://www.blog.pythonlibrary.org/2019/05/08/creating-gui-applications-with-wxpython-now-available/">Creating GUI Applications with wxPython</a>. The book is currently on sale till May 15. Having to review has served as an extra incentive to read the book regularly, and so far I’m quite satisfied to have done so.</p>
+
+<p><img src="http://localhost:4000/images/python_gui/wxPython_book_cover.png" alt="book cover" class="align-center" /></p>
+
+<p>I hadn’t heard of <a href="https://wxpython.org">wxPython</a> before this book. When it comes to GUI in Python, I knew about <code class="language-plaintext highlighter-rouge">tkinter</code> which comes by default with standard libary, <a href="https://kivy.org">Kivy</a>, <a href="https://www.pygame.org">Pygame</a> and <a href="https://pypi.org/project/PyQt5/">PyQt5</a>. This book starts with an introduction to <code class="language-plaintext highlighter-rouge">wxPython</code> and then dives into project-based approach. I’ve finished half the chapters so far, covering four project concepts:</p>
+
+<ul>
+  <li>Image viewer</li>
+  <li>Database viewer and editor</li>
+  <li>Calculator</li>
+  <li>Archiver</li>
+</ul>
+
+<p><img src="http://localhost:4000/images/python_gui/calculator.png" alt="calculator" class="align-center" /></p>
+
+<p>Rest of the chapters cover these topics:</p>
+
+<ul>
+  <li>MP3 tag editor</li>
+  <li>Image application using NASA’s API</li>
+  <li>PDF merger/splitter</li>
+  <li>File search</li>
+  <li>FTP application</li>
+  <li>XML editor</li>
+  <li>Distributing your application</li>
+</ul>
+
+<p>There are also a couple of appendix chapters.</p>
+
+<p>As mentioned in book’s introduction, you definitely need to be comfortable with Python classes before you start this book. The code used in the book is also available from <a href="https://github.com/driscollis/applications_with_wxpython">GitHub repo</a>, but I highly recommend to type them manually.</p>
+
+<p>The project nature also means that after chapter 3, you could probably skip chapters you are not interested in. For example, I didn’t pay too much attention to database chapters as I don’t have much experience with databases. Each project is described and shown step by step. The projects could be run at different stages as well - playing around with the GUI at those points helps in mapping code-to-output, as well as to experiment different settings.</p>
+
+<p>All in all, I would highly recommend this book for those wanting to start coding GUI applications in Python. And please do contact the author to let him know your feedback or if you have any clarifications. Happy learning :)</p>
+
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/curated-resources/python-for-maths/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> Python for maths
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/r/inteligencia%20artificial/Recomendador-de-Libros-(Filtrado-Colaborativo)/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Análisis exploratorio, filtrado colaborativo y aplicación Shiny con R.
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2020 Ciencia de Datos. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

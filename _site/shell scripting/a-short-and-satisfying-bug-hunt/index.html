@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>A short and satisfying bug hunt | Ciencia de Datos</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="A short and satisfying bug hunt" />
+<meta name="author" content="Carlos Flores" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The surprise" />
+<meta property="og:description" content="The surprise" />
+<link rel="canonical" href="http://localhost:4000/shell%20scripting/a-short-and-satisfying-bug-hunt/" />
+<meta property="og:url" content="http://localhost:4000/shell%20scripting/a-short-and-satisfying-bug-hunt/" />
+<meta property="og:site_name" content="Ciencia de Datos" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-06T15:04:04-06:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/shell%20scripting/a-short-and-satisfying-bug-hunt/","headline":"A short and satisfying bug hunt","dateModified":"2019-03-06T15:04:04-06:00","datePublished":"2019-03-06T15:04:04-06:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/lbe_logo.png"},"name":"Carlos Flores"},"author":{"@type":"Person","name":"Carlos Flores"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/shell%20scripting/a-short-and-satisfying-bug-hunt/"},"description":"The surprise","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  a-short-and-satisfying-bug-hunt">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/posts/">Posts</a></li><li><a href="/books/">Books</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Ciencia de Datos">
+        <img src="/images/lbe_logo.png" class="site-logo-img animated fadeInDown" alt="Ciencia de Datos">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Ciencia de Datos</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Hacer es a menudo mejor que pensar en hacerlo</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">A short and satisfying bug hunt
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info"><div class="author-name">
+        <span class="p-name">Carlos Flores</span>
+      </div><ul class="author-links"><li class="author-link">
+            <a class="u-url" rel="me" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-lg" title="GitHub"></i></a>
+          </li><li class="author-link">
+            <a class="u-url" rel="me" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-lg" title="Linkedin"></i></a>
+          </li></ul>
+
+<span class="read-time">7 min read</span>
+
+    <time class="page-date dt-published" datetime="2019-03-06T15:04:04-06:00"><a class="u-url" href="">March 6, 2019</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a class="p-category" href="/categories/#shell-scripting" title="Pages filed under shell scripting">shell scripting</a></li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#corner-case" title="Pages tagged corner case" rel="tag">corner case</a></li><li class="page-taxonomy"><a href="/tags/#debugging" title="Pages tagged debugging" rel="tag">debugging</a></li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <h2 id="the-surprise">The surprise</h2>
+
+<p>So, a pleasant surprise awaited me last Sunday. As is my usual habit, I opened my
+<a href="https://github.com/learnbyexample">github</a> account after breakfast to see if I’ve
+got any sudden spurt in traffic. And as usual, things were normal. Except for the blue
+notification, which was rare. I hoped it wasn’t a silly pull request and thankfully
+it was a <a href="https://github.com/learnbyexample/Command-line-text-processing/issues/24">new issue</a>
+that was opened.</p>
+
+<p>I gave the issue a cursory glance and wrongly guessed it was probably some line ending issue
+(user was on Windows OS). As someone who has seen plenty of
+bugs in previous job, I wasn’t ruling out anything though. I first cloned the repo so as to try
+to recreate the working environment without possible interference from my local working copy.
+As the user had provided detailed information while opening the issue, I was able to quickly
+replicate it. Sure enough, I was seeing the same problem. I only wondered why it wasn’t
+brought to my attention before. Either past users chose not to or things weren’t interesting
+enough to reach that far in the exercises.</p>
+
+<h2 id="creating-minimal-failing-case">Creating minimal failing case</h2>
+
+<p>As I had written the <a href="https://github.com/learnbyexample/Command-line-text-processing/blob/master/exercises/GNU_grep/solve">solution checker script</a>
+about 2 years back, the script looked alien.
+Right from cloning the repo, I had to fight the urge to improve things. By the time I spotted
+the issue, all such fantasies were thrown out. Replaced by a todo note to <em>someday</em> write automated
+testing script to check that my script is indeed working properly for all the exercises.</p>
+
+<p>To put it simply, the role of <code class="language-plaintext highlighter-rouge">solve</code> script is to check if the previous command
+executed by the user solves the current exercise question. To do so, the script
+gets the previous command from history and compares the output of that command
+and a reference solution present in the exercise directory. Sounds simple right?
+Yeah, I thought so too. I do remember testing few cases before I first published it
+and no one had submitted an issue so far. So, why was it failing now?</p>
+
+<p>As mentioned before, I thought it could be some weird line ending issue. But that was
+effectively ruled out as it was failing for me as well on Linux. Still, I did check
+for funny characters with <code class="language-plaintext highlighter-rouge">cat -A</code>. Nope, no issues there.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-o</span> <span class="s1">'^[^=]*'</span> sample.txt
+a[2]
+foo_bar
+appx_pi
+greeting
+food[4]
+b[0][1]
+<span class="nv">$ </span><span class="nb">source</span> ../solve <span class="nt">-s</span>
+<span class="nt">---------------------------------------------</span>
+Mismatch <span class="k">for </span>question 1:
+Expected output is:
+a[2]
+foo_bar
+appx_pi
+greeting
+food[4]
+b[0][1]
+<span class="nt">---------------------------------------------</span>
+</code></pre></div></div>
+
+<p>Expected output was same as output for submitted solution. So, why is the script failing?
+I remember passing the script through <a href="https://www.shellcheck.net/">shellcheck</a> but still
+checked it again. No progress. So, then I started by trying to debug the most likely
+culprit from terminal before trying to debug the whole script. Luckily, that turned out well.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>sample.txt 
+a[2]<span class="o">=</span><span class="s1">'sample string'</span>
+<span class="nv">foo_bar</span><span class="o">=</span>4232
+<span class="nv">appx_pi</span><span class="o">=</span>3.14
+<span class="nv">greeting</span><span class="o">=</span><span class="s2">"Hi  there		have a nice   day"</span>
+food[4]<span class="o">=</span><span class="s2">"dosa"</span>
+b[0][1]<span class="o">=</span>42
+
+<span class="nv">$ </span><span class="c"># say what??</span>
+<span class="nv">$ </span><span class="o">[[</span> <span class="si">$(</span><span class="nb">eval</span> <span class="s2">"command grep -o '^[^=]*' sample.txt"</span><span class="si">)</span> <span class="o">==</span> <span class="se">\</span>
+<span class="o">&gt;</span>    <span class="si">$(</span><span class="nb">eval</span> <span class="s2">"command grep -o '^[^=]*' sample.txt"</span><span class="si">)</span> <span class="o">]]</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s1">'Not fine'</span>
+Not fine
+
+<span class="nv">$ </span><span class="c"># after some attempts, I tried a command that won't have</span>
+<span class="nv">$ </span><span class="c"># any [] characters in the output</span>
+<span class="nv">$ </span><span class="c"># Eureka!</span>
+<span class="nv">$ </span><span class="o">[[</span> <span class="si">$(</span><span class="nb">eval</span> <span class="s2">"command grep 'bar' sample.txt"</span><span class="si">)</span> <span class="o">==</span> <span class="se">\</span>
+<span class="o">&gt;</span>    <span class="si">$(</span><span class="nb">eval</span> <span class="s2">"command grep 'bar' sample.txt"</span><span class="si">)</span> <span class="o">]]</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s1">'Not fine'</span>
+<span class="nv">$ </span><span class="o">[[</span> foo <span class="o">==</span> foo <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'fine'</span>
+fine
+<span class="nv">$ </span><span class="o">[[</span> <span class="s1">'a[5]'</span> <span class="o">==</span> a[5] <span class="o">]]</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s1">'Not fine'</span>
+Not fine
+<span class="nv">$ </span><span class="o">[[</span> <span class="s1">'a[5]'</span> <span class="o">==</span> <span class="s1">'a[5]'</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'fine'</span>
+fine
+</code></pre></div></div>
+
+<p>Having a minimal failing case from terminal was a relief. I tried <code class="language-plaintext highlighter-rouge">set -x</code> but
+that didn’t light a bulb either. Finally, somehow I thought perhaps characters
+in the output was causing the issue and when <code class="language-plaintext highlighter-rouge">[]</code> characters were not present,
+the comparison worked as expected.</p>
+
+<p>I did think quoting could be the issue, but dismissed it at first as both sides
+of comparison had the same command. Then my recent experience from reviewing
+<a href="https://www.packtpub.com/application-development/command-line-fundamentals">Command Line Fundamentals</a>
+book came in handy. I remembered that if quotes aren’t used on RHS of comparison
+operator, it is treated as <code class="language-plaintext highlighter-rouge">glob</code> matching instead of string matching. Phew.</p>
+
+<h2 id="tldr">TL;DR</h2>
+
+<p>Always <a href="https://unix.stackexchange.com/questions/131766/why-does-my-shell-script-choke-on-whitespace-or-other-special-characters">quote strings in bash</a>
+unless you have a very good reason for not using them.</p>
+
+<p>After adding double quotes around the command substitution commands, the script
+worked as expected. I thanked the user for opening the issue. And then informed
+the author for cli fundamentals book as well.</p>
+
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/intelligence%20artificielle/r/IA-Reglas-predicci%C3%B3n-del-clima/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> IA Reglas predicción del clima
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/tutorial/ebook-generation/customizing-pandoc/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Customizing pandoc to generate beautiful pdfs from markdown
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2020 Ciencia de Datos. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Escribir código eficiente con Python. | Ciencia de Datos</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Escribir código eficiente con Python." />
+<meta name="author" content="Carlos Flores" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Escribiendo código eficiente con Python" />
+<meta property="og:description" content="Escribiendo código eficiente con Python" />
+<link rel="canonical" href="http://localhost:4000/python/coding%20best%20practices/Escribir-c%C3%B3digo-eficiente-python/" />
+<meta property="og:url" content="http://localhost:4000/python/coding%20best%20practices/Escribir-c%C3%B3digo-eficiente-python/" />
+<meta property="og:site_name" content="Ciencia de Datos" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-01T08:37:42-06:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/python/coding%20best%20practices/Escribir-c%C3%B3digo-eficiente-python/","headline":"Escribir código eficiente con Python.","dateModified":"2019-01-01T08:37:42-06:00","datePublished":"2019-01-01T08:37:42-06:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/lbe_logo.png"},"name":"Carlos Flores"},"author":{"@type":"Person","name":"Carlos Flores"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/python/coding%20best%20practices/Escribir-c%C3%B3digo-eficiente-python/"},"description":"Escribiendo código eficiente con Python","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  escribir-código-eficiente-con-python">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/posts/">Posts</a></li><li><a href="/books/">Books</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Ciencia de Datos">
+        <img src="/images/lbe_logo.png" class="site-logo-img animated fadeInDown" alt="Ciencia de Datos">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Ciencia de Datos</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Hacer es a menudo mejor que pensar en hacerlo</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Escribir código eficiente con Python.
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info"><div class="author-name">
+        <span class="p-name">Carlos Flores</span>
+      </div><ul class="author-links"><li class="author-link">
+            <a class="u-url" rel="me" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-lg" title="GitHub"></i></a>
+          </li><li class="author-link">
+            <a class="u-url" rel="me" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-lg" title="Linkedin"></i></a>
+          </li></ul>
+
+<span class="read-time">18 min read</span>
+
+    <time class="page-date dt-published" datetime="2019-01-01T08:37:42-06:00"><a class="u-url" href="">January 1, 2019</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a class="p-category" href="/categories/#coding-best-practices" title="Pages filed under Coding Best Practices">Coding Best Practices</a></li><li class="page-taxonomy"><a class="p-category" href="/categories/#python" title="Pages filed under Python">Python</a></li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#coding-best-practices" title="Pages tagged Coding Best Practices" rel="tag">Coding Best Practices</a></li><li class="page-taxonomy"><a href="/tags/#python" title="Pages tagged Python" rel="tag">Python</a></li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <h2 id="escribiendo-código-eficiente-con-python">Escribiendo código eficiente con Python</h2>
+
+<p>Como científico de datos, la mayor parte del tiempo debemos dedicarlo a obtener información procesable de los datos, sin esperar a que el código termine de ejecutarse.</p>
+
+<p>Escribir un código Python eficiente puede ayudar a reducir el tiempo de ejecución y ahorrar recursos computacionales, lo que finalmente nos libera para hacer las cosas que amamos como Científico de Datos.</p>
+
+<p>Revisaremos el uso de estructuras de datos, funciones y módulos integrados de Python para escribir código más limpio, más rápido y más eficiente.</p>
+
+<p>Exploraremos cómo calcular el tiempo y el código de perfil para encontrar cuellos de botella.</p>
+
+<p>Practicando la eliminación de estos cuellos de botella y otros patrones de diseño incorrectos, utilizando la Biblioteca estándar de Python, NumPy y pandas.</p>
+
+<h2 id="fundamentos-para-la-eficiencia">Fundamentos para la eficiencia.</h2>
+
+<p><strong>¿Qué es eficiente?</strong></p>
+
+<p>El código que se ejecuta rápidamente para la tarea en cuestión, minimiza la huella de memoria y sigue los principios de estilo de codificación de Python.</p>
+
+<p><strong>Formas no Pythonic y Pythonic para recorrer una lista</strong></p>
+
+<p>Imprimiendo los valores con longitud mayor a 6, de lista creada con enfoque no $Pythonic$</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Jerry'</span><span class="p">,</span> <span class="s">'Kramer'</span><span class="p">,</span> <span class="s">'Elaine'</span><span class="p">,</span> <span class="s">'George'</span><span class="p">,</span> <span class="s">'Newman'</span><span class="p">]</span>
+
+<span class="c1">#Forma no Pythonic
+</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">new_list</span><span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="n">new_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['Kramer', 'Elaine', 'George', 'Newman']
+</code></pre></div></div>
+
+<p>Un enfoque más $Pythonic$ recorrería el contenido de names, en lugar de utilizar una variable de índice.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Imprimiendo la lista creada al recorrer el contenido de los nombres.
+</span>
+<span class="n">better_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="n">better_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">better_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['Kramer', 'Elaine', 'George', 'Newman']
+</code></pre></div></div>
+
+<p>La mejor forma $Pythonic$ forma de hacer esto es mediante el uso de listas por comprensión.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Imprimiendo la lista usando listas de comprension.
+</span><span class="n">best_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">best_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['Kramer', 'Elaine', 'George', 'Newman']
+</code></pre></div></div>
+
+<p><strong>Zen de Python</strong></p>
+
+<p>EL Zen de Python escrito por Tim Peters, enumera 19 modismos que sirven como principios rectores para cualquier Pythonista.</p>
+
+<p>Python tiene cientos de propuestas de mejora Python, comúnmente conocidas como PEP.</p>
+
+<p>El Zen de Python es uno de estos PEP y está documentado como PEP20 .</p>
+
+<p>Un pequeño huevo de Pascua en Python es la capacidad de imprimir el Zen de Python usando el comando “import this”.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">this</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+</code></pre></div></div>
+
+<p>Tipos incorporados</p>
+
+<ul>
+  <li>list, tuple, set, dict y otros</li>
+</ul>
+
+<p>Funciones incorporadas</p>
+
+<ul>
+  <li>print(), len(), range(), round(), enumerate(), map(), zip()</li>
+</ul>
+
+<p>Modulos incorporados</p>
+
+<ul>
+  <li>os, sys, itertools, collections, math y otros</li>
+</ul>
+
+<p><strong>Uso eficiente de range()</strong></p>
+
+<p>Permite crear secuencias de números personalizadas.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Podemos escribirlos de estas 2 maneras
+</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+</code></pre></div></div>
+
+<p><strong>Uso de enumerate()</strong></p>
+
+<p>Esta función es útil para obtener una lista indexada.</p>
+
+<p>Tenemos una lista de personas que llegaron a una fiesta. La lista está ordenada por llegada (Jerry fue el primero en llegar, seguido de Kramer, etc.):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Jerry'</span><span class="p">,</span> <span class="s">'Kramer'</span><span class="p">,</span> <span class="s">'Elaine'</span><span class="p">,</span> <span class="s">'George'</span><span class="p">,</span> <span class="s">'Newman'</span><span class="p">]</span>
+
+<span class="c1"># Usando un loop con lista de comprension
+</span><span class="n">indexed_names_comp</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">indexed_names_comp</span><span class="p">)</span>
+
+<span class="c1"># Desempaquetando un objeto de enumeración con un índice inicial de uno
+</span><span class="n">indexed_names_unpack</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">indexed_names_unpack</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[(0, 'Jerry'), (1, 'Kramer'), (2, 'Elaine'), (3, 'George'), (4, 'Newman')]
+[(1, 'Jerry'), (2, 'Kramer'), (3, 'Elaine'), (4, 'George'), (5, 'Newman')]
+</code></pre></div></div>
+
+<p><strong>Uso de map()</strong></p>
+
+<p>Aplica una función a cada elemento de un objeto.</p>
+
+<p>Supongamos que queremos convertir las letras de cada nombre de la lista names en mayusculas.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Usando map() aplicando str.upper a cada elemento de names
+</span><span class="n">names_map</span>  <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">upper</span><span class="p">,</span><span class="n">names</span><span class="p">)</span>
+
+<span class="c1"># Tipo de dato map
+</span><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">names_map</span><span class="p">))</span>
+
+<span class="c1"># Desempaquetando names_map a lista
+</span><span class="n">names_uppercase</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">names_map</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">names_uppercase</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'map'&gt;
+['JERRY', 'KRAMER', 'ELAINE', 'GEORGE', 'NEWMAN']
+</code></pre></div></div>
+
+<p><strong>El poder de los arrays con Numpy</strong></p>
+
+<p><strong>Me hace falta saber definir la funcion de texto</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">welcome_guest</span><span class="p">(</span><span class="n">guest_arrivals</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">guest_arrivals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'Bienvenido Jerry... 17 min. tarde.'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create a list of arrival times
+</span><span class="n">arrival_times</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="c1"># Convert arrival_times to an array and update the times
+</span><span class="n">arrival_times_np</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">arrival_times</span><span class="p">)</span>
+<span class="n">new_times</span> <span class="o">=</span> <span class="n">arrival_times_np</span> <span class="o">-</span> <span class="mi">3</span>
+
+<span class="c1"># Use list comprehension and enumerate to pair guests to new times
+</span><span class="n">guest_arrivals</span> <span class="o">=</span> <span class="p">[(</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">time</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">time</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_times</span><span class="p">)]</span>
+
+<span class="n">guest_arrivals</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('Jerry', 7), ('Kramer', 17), ('Elaine', 27), ('George', 37), ('Newman', 47)]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">welcome_guest</span><span class="p">(</span><span class="n">guest_arrivals</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Bienvenido ('Jerry', 7)... ('Kramer', 17) min. tarde."
+</code></pre></div></div>
+
+<h2 id="tiempo-de-ejecución">Tiempo de ejecución</h2>
+
+<p>¿Por qué debemos cronometrar nuestro código?</p>
+
+<p>Respuestas:</p>
+
+<ol>
+  <li>
+    <p>Nos permite elegir el enfoque de codificación óptimo</p>
+  </li>
+  <li>
+    <p>Código más rápido == código más eficiente</p>
+  </li>
+</ol>
+
+<p><strong>¿Cómo podemos cronometrar nuestro código?</strong></p>
+
+<p>Calcule el tiempo de ejecución con el comando mágico de IPython %timeit</p>
+
+<p>Comandos mágicos: mejoras sobre la sintaxis normal de Python Predeterminado por el carácter “%”</p>
+
+<p>Todos los comandos mágicos disponibles con %lsmagic</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Creando una lista de comprension
+</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">nums_list_comp</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">51</span><span class="p">)]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">nums_list_comp</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.6 µs ± 183 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Creando una lista de comprension
+</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">nums_list_comp</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">51</span><span class="p">)]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">nums_list_comp</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.6 µs ± 183 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+</code></pre></div></div>
+
+<p>Desempacar el objeto de rango es más rápido que la comprensión de la lista.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Creando una lista, desempaquetando
+</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">nums_unpack</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">51</span><span class="p">)]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">nums_unpack</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>621 ns ± 5.79 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+</code></pre></div></div>
+
+<p>La el comando %timeit tienen un número definido de ejecuciones y bucles.</p>
+
+<p>Pordemos especificar el número de ejecuciones / bucles, establecer el número de ejecuciones (-r) y/o bucles (-n).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Una ejecución y 10 bucles
+</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">r1</span> <span class="o">-</span><span class="n">n10</span> <span class="n">nums_list_comp</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">51</span><span class="p">)]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">nums_list_comp</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4.43 µs ± 0 ns per loop (mean ± std. dev. of 1 run, 10 loops each)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Una ejecucion y 10 bucles
+</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">r1</span> <span class="o">-</span><span class="n">n10</span> <span class="n">nums_unpack</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">51</span><span class="p">)]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">nums_unpack</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.35 µs ± 0 ns per loop (mean ± std. dev. of 1 run, 10 loops each)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+</code></pre></div></div>
+
+<p>Analisando el tiempo de ejecución de multiples linea de codito con %%timeit.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">timeit</span>
+
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">nums</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.07 µs ± 19.8 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+</code></pre></div></div>
+
+<p><strong>Comparación de tiempos</strong></p>
+
+<p>Las estructuras de datos de Python se pueden crear usando un nombre formal</p>
+
+<ul>
+  <li>formal_list = list()</li>
+  <li>formal_dict = dict()</li>
+  <li>formal_tuple = tuple()</li>
+</ul>
+
+<p>Las estructuras de datos de Python se pueden crear usando sintaxis literal</p>
+
+<ul>
+  <li>literal_list = []</li>
+  <li>literal_dict = {}</li>
+  <li>literal_tuple = ()</li>
+</ul>
+
+<p>Veamos los tiempos de creación de cada estructura.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f_time</span> <span class="o">=</span> <span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">o</span> <span class="n">formal_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>129 ns ± 3.02 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">l_time</span> <span class="o">=</span> <span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">o</span> <span class="n">literal_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>49.5 ns ± 1.5 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_time</span><span class="p">.</span><span class="n">average</span> <span class="o">-</span> <span class="n">l_time</span><span class="p">.</span><span class="n">average</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'l_time mejor que f_time por {} ns'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">diff</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>l_time mejor que f_time por 79.7460328998568 ns
+</code></pre></div></div>
+
+<p><strong>Guardando el tiempo en una variable</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Guardando el tiempo en una variable
+</span>
+<span class="n">times</span> <span class="o">=</span> <span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">o</span> <span class="n">rand_nums</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">times</span><span class="p">.</span><span class="n">timings</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>18 µs ± 504 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+
+
+
+
+
+[1.7536134300462437e-05,
+ 1.7378414599807003e-05,
+ 1.766876389956451e-05,
+ 1.8132931500440464e-05,
+ 1.882860290061217e-05,
+ 1.8517823400179622e-05,
+ 1.7674591000104555e-05]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">times</span><span class="p">.</span><span class="n">best</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.7378414599807003e-05
+</code></pre></div></div>
+
+<p><strong>Perfiles de código para tiempo de ejecución</strong></p>
+
+<ul>
+  <li>
+    <p>Estadísticas detalladas sobre la frecuencia y la duración de las llamadas a funciones</p>
+  </li>
+  <li>
+    <p>Análisis línea por línea</p>
+  </li>
+  <li>
+    <p>Paquete utilizado: <strong>line_profiler “pip install line_profiler”</strong></p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">heroes</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Batman'</span><span class="p">,</span><span class="s">'Superman'</span><span class="p">,</span><span class="s">'Wonder Woman'</span><span class="p">]</span>
+
+<span class="n">hts</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">188.0</span><span class="p">,</span> <span class="mf">191.0</span><span class="p">,</span> <span class="mf">183.0</span><span class="p">])</span>
+<span class="n">wts</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">95.0</span><span class="p">,</span> <span class="mf">101.0</span><span class="p">,</span> <span class="mf">74.0</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">convert_units</span><span class="p">(</span><span class="n">heroes</span><span class="p">,</span> <span class="n">heights</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+
+    <span class="n">new_hts</span> <span class="o">=</span> <span class="p">[</span><span class="n">ht</span> <span class="o">*</span> <span class="mf">0.39370</span> <span class="k">for</span> <span class="n">ht</span> <span class="ow">in</span> <span class="n">heights</span><span class="p">]</span>
+    <span class="n">new_wts</span> <span class="o">=</span> <span class="p">[</span><span class="n">wt</span> <span class="o">*</span> <span class="mf">2.20462</span> <span class="k">for</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]</span>
+
+    <span class="n">hero_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">hero</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">heroes</span><span class="p">):</span>
+        <span class="n">hero_data</span><span class="p">[</span><span class="n">hero</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_hts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">new_wts</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">hero_data</span>
+
+<span class="n">convert_units</span><span class="p">(</span><span class="n">heroes</span><span class="p">,</span> <span class="n">hts</span><span class="p">,</span> <span class="n">wts</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'Batman': (74.01559999999999, 209.4389)}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Uso del paquete line_profiler
+</span><span class="o">%</span><span class="n">load_ext</span> <span class="n">line_profiler</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The line_profiler extension is already loaded. To reload it, use:
+  %reload_ext line_profiler
+</code></pre></div></div>
+
+<p><strong>Usando %lprun detectamos cuellos de botella</strong>  aqui me quede</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Comando mágico para tiempos línea por línea
+</span>
+<span class="o">%</span><span class="n">lprun</span> <span class="o">-</span><span class="n">f</span> <span class="n">convert_units</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timer unit: 1e-06 s
+
+Total time: 0 s
+File: &lt;ipython-input-51-53cbc6b56d73&gt;
+Function: convert_units at line 6
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     6                                           def convert_units(heroes, heights, weights):
+     7                                           
+     8                                               new_hts = [ht * 0.39370 for ht in heights]
+     9                                               new_wts = [wt * 2.20462 for wt in weights]
+    10                                               
+    11                                               hero_data = {}
+    12                                               
+    13                                               for i,hero in enumerate(heroes):
+    14                                                   hero_data[hero] = (new_hts[i], new_wts[i])
+    15                                                   return hero_data
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">lprun</span> <span class="o">-</span><span class="n">f</span> <span class="n">convert_units</span> <span class="n">convert_units</span><span class="p">(</span><span class="n">heroes</span><span class="p">,</span> <span class="n">hts</span><span class="p">,</span> <span class="n">wts</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timer unit: 1e-06 s
+
+Total time: 4.4e-05 s
+File: &lt;ipython-input-51-53cbc6b56d73&gt;
+Function: convert_units at line 6
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     6                                           def convert_units(heroes, heights, weights):
+     7                                           
+     8         1         26.0     26.0     59.1      new_hts = [ht * 0.39370 for ht in heights]
+     9         1          8.0      8.0     18.2      new_wts = [wt * 2.20462 for wt in weights]
+    10                                               
+    11         1          2.0      2.0      4.5      hero_data = {}
+    12                                               
+    13         1          4.0      4.0      9.1      for i,hero in enumerate(heroes):
+    14         1          2.0      2.0      4.5          hero_data[hero] = (new_hts[i], new_wts[i])
+    15         1          2.0      2.0      4.5          return hero_data
+</code></pre></div></div>
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+
+  
+    <a class="page-next" href="/intelligence%20artificielle/r/IA-Reglas-predicci%C3%B3n-del-clima/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        IA Reglas predicción del clima
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/Corderodedios182"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="https://www.linkedin.com/in/carlos-roberto-flores-luna-5050a413b/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2020 Ciencia de Datos. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>
