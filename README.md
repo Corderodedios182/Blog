@@ -1,7 +1,6 @@
-Mi increíble blog de programación increíble está ahora en vivo en https://corderodedios182.github.io
+Mi increíble blog de programación está ahora en vivo https://corderodedios182.github.io
 
 :warning: :construction: Trabajo aún en progreso, estar atentos ...
-
 
 <br>
 
