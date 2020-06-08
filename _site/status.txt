@@ -2,8 +2,4 @@
 
 - Colocar libros
 
-- Colocar post heroky plotly
-
 - Proyecto de redes bayesianas
-
-

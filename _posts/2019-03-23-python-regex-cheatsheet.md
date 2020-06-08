@@ -1,14 +1,13 @@
 ---
 title: "Python regular expression cheatsheet and examples"
 categories:
-  - cheatsheet
-  - python
+  - Python
 tags:
-  - python
+  - Python
   - regular-expressions
   - re-module
   - examples
-date: 2019-09-23T10:41:37
+date: 2019-03-23T10:41:37
 ---
 
 ![pyregex example]({{ '/images/books/pyregex_example.png' | absolute_url }}){: .align-center}
@@ -23,7 +22,7 @@ From [docs.python: re](https://docs.python.org/3/library/re.html):
 
 This blog post gives an overview and examples of regular expression syntax as implemented by the `re` built-in module (Python 3.7+). Assume ASCII character set unless otherwise specified. This post is an excerpt from my [Python re(gex)?](https://github.com/learnbyexample/py_regular_expressions) book.
 
-## Elements that define a regular expression 
+## Elements that define a regular expression
 
 | Anchors | Description |
 | ------------- | ----------- |
@@ -183,7 +182,7 @@ False
 # re.search output can be directly used in conditional expressions
 >>> if re.search(r'ring', sentence):
 ...     print('mission success')
-... 
+...
 mission success
 
 # use raw byte strings if input is of byte data type
@@ -293,7 +292,7 @@ True
 >>> m_iter = re.finditer(r'ab+c', 'abc ac adc abbbc')
 >>> for m in m_iter:
 ...     print(m.span())
-... 
+...
 (0, 3)
 (11, 16)
 ```
@@ -343,7 +342,7 @@ True
 >>> numbers = '1 2 3 4 5'
 >>> def fact_num(n):
 ...     return str(factorial(int(n[0])))
-... 
+...
 >>> re.sub(r'\d+', fact_num, numbers)
 '1 2 6 24 120'
 
@@ -409,4 +408,3 @@ Visit my repo [Python re(gex)?](https://github.com/learnbyexample/py_regular_exp
 Use [this leanpub link](https://leanpub.com/py_regex/c/P7erPYAm1386) for a discounted price.
 
 ![pyregex cover image]({{ '/images/books/pyregex.png' | absolute_url }}){: .align-center}
-

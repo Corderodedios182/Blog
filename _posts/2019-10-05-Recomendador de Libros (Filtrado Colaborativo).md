@@ -2,11 +2,11 @@
 title: "Análisis exploratorio, filtrado colaborativo y aplicación Shiny con R."
 categories:
   - R
-  - Inteligencia Artificial
+  - Intelligence Artificielle
 tags:
-  - Inteligencia Artificial
+  - Intelligence Artificielle
   - R
-date: 2019-06-01T14:37:42
+date: 2019-10-05T14:37:42
 ---
 
 ¿Alguna vez te has preguntado qué libro leer?, Las recomendaciones de libros son un tema fascinante.

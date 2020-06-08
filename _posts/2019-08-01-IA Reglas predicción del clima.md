@@ -1,12 +1,12 @@
 ---
 title: "IA Reglas predicción del clima"
 categories:
-  - Intelligence artificielle
+  - Intelligence Artificielle
   - R
 tags:
-  - Intelligence artificielle
+  - Intelligence Artificielle
   - R
-date: 2019-02-01T14:37:42
+date: 2019-08-01T14:37:42
 ---
 
 ## Reglas del sistema de predicción del clima.

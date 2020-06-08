@@ -6,7 +6,7 @@ categories:
 tags:
   - Coding Best Practices
   - Python
-date: 2019-01-01T14:37:42
+date: 2019-10-01T14:37:42
 ---
 
 ## Escribiendo código eficiente con Python

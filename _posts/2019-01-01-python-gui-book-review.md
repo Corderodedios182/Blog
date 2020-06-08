@@ -1,12 +1,13 @@
 ---
 title: "Creating GUI Applications with wxPython - book review"
 categories:
+  - Python
   - book-review
 tags:
-  - python
+  - Python
   - gui
   - wxpython
-date: 2019-05-13T11:02:19
+date: 2019-01-01T11:02:19
 ---
 
 ![GUI example]({{ '/images/python_gui/GUI_example.jpg' | absolute_url }}){: .align-center}
@@ -45,4 +46,3 @@ As mentioned in book's introduction, you definitely need to be comfortable with 
 The project nature also means that after chapter 3, you could probably skip chapters you are not interested in. For example, I didn't pay too much attention to database chapters as I don't have much experience with databases. Each project is described and shown step by step. The projects could be run at different stages as well - playing around with the GUI at those points helps in mapping code-to-output, as well as to experiment different settings.
 
 All in all, I would highly recommend this book for those wanting to start coding GUI applications in Python. And please do contact the author to let him know your feedback or if you have any clarifications. Happy learning :)
-

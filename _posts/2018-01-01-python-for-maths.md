@@ -3,16 +3,16 @@ title: "Python for maths"
 categories:
   - curated-resources
 tags:
-  - python
+  - Python
   - maths
-date: 2019-03-22T16:22:17
+date: 2018-01-01T16:22:17
 ---
 
 ![sample plot]({{ '/images/python_for_maths/gravitational_plot.png' | absolute_url }}){: .align-center}
 
 The above image was generated using `matplotlib` courtesy code provided by [Doing Math with Python](https://github.com/doingmathwithpython/code/blob/master/chapter2/Chapter2.ipynb) book.
 
-Last month, I had an opportunity to conduct beginner Python workshop for maths department students in an arts and science college. It was a great experience and I had my first taste of how Python could be applied for mathematical problems. Presented here are bunch of useful links that I gathered as resources for the students. 
+Last month, I had an opportunity to conduct beginner Python workshop for maths department students in an arts and science college. It was a great experience and I had my first taste of how Python could be applied for mathematical problems. Presented here are bunch of useful links that I gathered as resources for the students.
 
 # Documentation links
 
@@ -37,7 +37,7 @@ Last month, I had an opportunity to conduct beginner Python workshop for maths d
 
 # Python for beginners
 
-* [automatetheboringstuff](https://automatetheboringstuff.com/) 
+* [automatetheboringstuff](https://automatetheboringstuff.com/)
 * [Think Python](https://greenteapress.com/wp/think-python-2e/)
 * [How to Think Like a Computer Scientist: Interactive Edition](https://interactivepython.org/courselib/static/thinkcspy/index.html)
 * [Comprehensive Python Cheatsheet](https://gto76.github.io/python-cheatsheet/)
@@ -73,4 +73,3 @@ Last month, I had an opportunity to conduct beginner Python workshop for maths d
 * [Maths curated resource links](https://github.com/learnbyexample/curated_resources/blob/master/Education.md#maths)
 * [Sagemath](https://www.sagemath.org/)
 * [GNU Octave](https://www.gnu.org/software/octave/)
-

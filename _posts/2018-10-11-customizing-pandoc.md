@@ -8,7 +8,7 @@ tags:
   - xelatex
   - markdown
   - pdf
-date: 2019-03-11T21:05:25
+date: 2018-10-11T21:05:25
 ---
 
 **Table of Contents**
@@ -345,4 +345,3 @@ Then, modify the `md2pdf_syn_bullet_prop_toc.sh` script by adding `--include-bef
 * [Tools to support markdown authoring](https://github.com/karthik/markdown_science/wiki/Tools-to-support-your-markdown-authoring)
 * [picular: search engine for colors](https://picular.co/)
 * [ebooks.stackexchange](https://ebooks.stackexchange.com/questions?sort=votes)
-

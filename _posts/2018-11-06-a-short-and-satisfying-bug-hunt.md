@@ -5,7 +5,7 @@ categories:
 tags:
   - debugging
   - corner case
-date: 2019-03-06T21:04:04
+date: 2018-11-06T21:04:04
 ---
 
 ## The surprise
@@ -72,7 +72,7 @@ checked it again. No progress. So, then I started by trying to debug the most li
 culprit from terminal before trying to debug the whole script. Luckily, that turned out well.
 
 ```bash
-$ cat sample.txt 
+$ cat sample.txt
 a[2]='sample string'
 foo_bar=4232
 appx_pi=3.14
@@ -117,4 +117,3 @@ unless you have a very good reason for not using them.
 After adding double quotes around the command substitution commands, the script
 worked as expected. I thanked the user for opening the issue. And then informed
 the author for cli fundamentals book as well.
-
